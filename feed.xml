@@ -2,7 +2,7 @@
 <rss version="2.0"><channel><title>Aleksandr Kovalev</title><link>https://kovalalvi.github.io/</link>
 <description>AI for brain-computer interfaces</description><item><title>Brain-computer interfaces in China: 12 companies, money and data</title><link>https://kovalalvi.github.io/blog/neurotech-china/</link>
 <guid>https://kovalalvi.github.io/blog/neurotech-china/</guid><pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
-<description>China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and put $922M into BCI in 2026. I went through 12 companies.</description></item><item><title>A whole-brain interface from 70 patients: the Precision Neuroscience atlas</title><link>https://kovalalvi.github.io/blog/precision-atlas/</link>
+<description>China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and raised over $1B for BCI in the first half of 2026 alone. I went through 12 companies.</description></item><item><title>A whole-brain interface from 70 patients: the Precision Neuroscience atlas</title><link>https://kovalalvi.github.io/blog/precision-atlas/</link>
 <guid>https://kovalalvi.github.io/blog/precision-atlas/</guid><pubDate>Wed, 14 Oct 2026 00:00:00 +0000</pubDate>
 <description>Precision recorded 70 patients with 1024-electrode surface grids and built an atlas of cortex, brainstem and spinal cord. What they found, and what I would train on this data.</description></item><item><title>Masked autoencoders learn perception-relevant representations from resting-state V1</title><link>https://kovalalvi.github.io/blog/mae-resting-state/</link>
 <guid>https://kovalalvi.github.io/blog/mae-resting-state/</guid><pubDate>Tue, 11 Aug 2026 00:00:00 +0000</pubDate>
