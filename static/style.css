@@ -1,0 +1,101 @@
+:root {
+  --bg: #fbfaf7;
+  --text: #1c1b19;
+  --muted: #6b6862;
+  --rule: #e4e1da;
+  --accent: #b4441f;
+  --code-bg: #f1efe9;
+  --serif: "Source Serif 4", Charter, Georgia, serif;
+  --sans: Inter, -apple-system, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161514;
+    --text: #e8e5df;
+    --muted: #9a968e;
+    --rule: #2e2c29;
+    --accent: #e8825c;
+    --code-bg: #211f1d;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0 auto;
+  max-width: 44rem;
+  padding: 0 1rem;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1.125rem/1.65 var(--serif);
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* header / footer */
+header.site, footer.site {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font: 400 0.875rem/1.4 var(--sans);
+}
+header.site { padding: 2rem 0 3rem; }
+header.site .home { color: var(--text); font-weight: 600; }
+body:has(.intro) header.site .home { visibility: hidden; }  /* home page has the name as h1 */
+header.site nav a { margin-left: 1.25rem; color: var(--muted); }
+footer.site { margin: 5rem 0 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); }
+footer.site a { color: var(--muted); }
+
+/* type */
+h1 { font: 600 2.1rem/1.2 var(--serif); margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+h2 {
+  font: 600 0.8rem/1.4 var(--sans); text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); margin: 3.5rem 0 1rem;
+}
+article h2 { font: 600 1.4rem/1.3 var(--serif); text-transform: none; letter-spacing: 0; color: var(--text); margin: 2.75rem 0 0.75rem; }
+article h3 { font: 600 1.1rem/1.4 var(--serif); margin: 2rem 0 0.5rem; }
+p, ul, ol { margin: 0 0 1.1rem; }
+ul, ol { padding-left: 1.25rem; }
+li { margin-bottom: 0.35rem; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 2px solid var(--rule); color: var(--muted); }
+code { font: 0.85em var(--mono); background: var(--code-bg); padding: 0.1em 0.3em; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 1rem; overflow-x: auto; border-radius: 4px; font-size: 0.85rem; }
+pre code { background: none; padding: 0; }
+img, video { max-width: 100%; height: auto; }
+figure { margin: 2rem 0; }
+figcaption { font: 0.85rem/1.5 var(--sans); color: var(--muted); margin-top: 0.5rem; }
+table { border-collapse: collapse; width: 100%; font: 0.9rem/1.5 var(--sans); margin: 1.5rem 0; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 0.4rem 0.75rem 0.4rem 0; border-bottom: 1px solid var(--rule); }
+.footnote { font-size: 0.9rem; color: var(--muted); }
+
+/* small sans meta text */
+.meta, .links, .date, .tag { font: 400 0.85rem/1.5 var(--sans); color: var(--muted); }
+
+/* home */
+.intro .lead { font-size: 1.25rem; line-height: 1.55; }
+.links a { margin-right: 1rem; white-space: nowrap; }
+.entry { margin-bottom: 1.6rem; }
+.entry .title { font-weight: 600; }
+.entry .when { font: 0.85rem var(--sans); color: var(--muted); margin-left: 0.4rem; }
+.entry p { margin: 0.2rem 0 0.3rem; }
+.entry .links a { margin-right: 0.75rem; }
+.pubs .entry { margin-bottom: 1.1rem; font-size: 1rem; }
+.pubs .venue { font-style: italic; color: var(--muted); }
+
+/* post lists */
+ul.posts { list-style: none; padding: 0; }
+ul.posts li { display: flex; gap: 1rem; margin-bottom: 0.6rem; }
+ul.posts .date { flex: 0 0 6.5rem; padding-top: 0.2rem; }
+
+/* post page */
+article header { margin-bottom: 2.5rem; }
+article .meta a { color: var(--muted); }
+.post-footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font: 0.9rem var(--sans); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+@media (max-width: 540px) {
+  body { font-size: 1.05rem; }
+  h1 { font-size: 1.75rem; }
+  header.site { padding: 1.25rem 0 2rem; }
+  ul.posts li { flex-direction: column; gap: 0; }
+  ul.posts .date { flex: none; padding: 0; }
+}
