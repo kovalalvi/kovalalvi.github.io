@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masked autoencoders learn perception-relevant representations from resting-state V1</title>
+<meta name="description" content="We pretrain an MAE on 14.6 hours of spontaneous activity from V1 of a blind patient with a Utah array, and decode from the response to stimulation whether the person sees a phosphene. Our AAAI-26 workshop paper.">
+<meta property="og:title" content="Masked autoencoders learn perception-relevant representations from resting-state V1">
+<meta property="og:description" content="We pretrain an MAE on 14.6 hours of spontaneous activity from V1 of a blind patient with a Utah array, and decode from the response to stimulation whether the person sees a phosphene. Our AAAI-26 workshop paper.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/mae-resting-state/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/mae-resting-state/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a></nav>
+</header>
+<main>
+<article>
+<header class="title-block">
+<h1>Masked autoencoders learn perception-relevant representations from resting-state V1</h1>
+<p class="dek">We pretrain an MAE on 14.6 hours of spontaneous activity from V1 of a blind patient with a Utah array, and decode from the response to stimulation whether the person sees a phosphene. Our AAAI-26 workshop paper.</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>UMH, Spain</div>
+  <div><span>Published</span>Nov 18, 2026</div>
+  <div><span>Type</span>own work</div>
+</div>
+</header>
+<p>tl;dr: we pretrain an MAE on 14.6 hours of spontaneous activity from V1 of a blind patient with a Utah array, and from the neural response to stimulation we decode whether the person sees a phosphene or not. Real patient data.</p>
+<p>I finally got around to writing a short review of my AAAI-26 paper. I already shared the poster, and now it has made it to arXiv too.</p>
+<p>So, we work with Utah array signals from V1 of blind people: we can both stimulate and record. It would be great not to ask the person every time whether they see something, but to understand it directly from the neural response to stimulation. Plus we have accumulated a lot of spontaneous activity: 252 sessions, 14.6 hours of recordings from 96 channels. So the question is: can we pretrain a model on this data so that it helps tell whether the person sees or not.</p>
+<h2 id="model">Model</h2>
+<p>I took MAE as the base. By the way, my very first review on my Telegram channel was about this exact model, many years ago. I trained it and saw lots of clusters by session in the latents, which doesn't fit the task at all: we want to tell whether the person sees or not, not guess on which day the recording was made. So I added a second loss, basically a sigmoid loss like in SigLIP, but the other way around: I pull together features from different sessions and push apart features from the same session. Plus I feed the session embedding to the decoder as a separate token: all session information goes there, and the encoder simply has no reason to keep it in the latents. The latent space started to look much better, and the metrics went up.</p>
+<h2 id="results">Results</h2>
+<p>On top of the frozen encoder we train a plain logistic regression. On the psychometric task we get 84.1% versus 80.2% on raw MUA and 82.4% on PCA. Looking ahead, the latents also show which electrode was stimulated and with what current: neighbouring electrodes cluster together, hello retinotopy. But the most interesting one is the threshold task: same electrode, current fixed at the 50% threshold, the person sometimes sees a phosphene and sometimes not. Even here we decode perception at 64% versus 60% on raw data.</p>
+<p>So I finally closed this one and shared it. I had been meaning to for several weeks and never got to it.</p>
+<h2 id="next-step">Next step</h2>
+<p>Turn this into a full paper: train on several people and run proper ablations. Hopefully it works out, and then it goes somewhere like the Journal of Neural Engineering.</p>
+<p>Paper: Kovalev<em>, Lozano</em>, Grani* et al. <a href="https://arxiv.org/abs/2607.22615">Masked Autoencoders Learn Perception-Relevant Representations from Resting State Neural Data</a>. NeuroAI Workshop @ AAAI 2026.</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell">Telegram channel (RU)</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+</body>
+</html>
