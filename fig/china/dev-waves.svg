@@ -1,0 +1,11 @@
+<svg class="cn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" aria-hidden="true"><style>
+  .cn .ink { stroke: var(--text, #1c1b19); fill: none; } .cn .inkf { fill: var(--text, #1c1b19); }
+  .cn .acc { stroke: var(--accent, #0e7470); fill: none; } .cn .accf { fill: var(--accent, #0e7470); }
+  .cn .mid { stroke: var(--fig-mid, #9a968e); fill: none; } .cn .midf { fill: var(--fig-mid, #9a968e); }
+  .cn .rulef { fill: var(--rule, #e4e1da); } .cn .rule { stroke: var(--rule, #e4e1da); fill: none; }
+  .cn .bgf { fill: var(--bg, #fbfaf7); } .cn .softf { fill: var(--code-bg, #f1efe9); }
+  .cn .bubble { fill: var(--accent, #0e7470); fill-opacity: .16; stroke: var(--accent, #0e7470); }
+  .cn text { font-family: "Inter Tight", -apple-system, "Helvetica Neue", Arial, sans-serif; fill: var(--muted, #6b6862); }
+  .cn .serif { font-family: "Source Serif 4", Georgia, serif; font-style: italic; fill: var(--text, #1c1b19); }
+  .cn .strong { fill: var(--text, #1c1b19); }
+</style><rect class="ink" x="14" y="34" width="12" height="32" rx="2" stroke-width="1.3"/><path class="acc" d="M34 28 Q44 50 34 72" stroke-width="1.1" opacity="1.00"/><path class="acc" d="M46 32 Q56 50 46 68" stroke-width="1.1" opacity="0.82"/><path class="acc" d="M58 36 Q68 50 58 64" stroke-width="1.1" opacity="0.64"/><path class="acc" d="M70 40 Q80 50 70 60" stroke-width="1.1" opacity="0.46"/><circle class="accf" cx="98" cy="50" r="4.5" stroke-width="0"/><path class="mid" d="M26,34 L98,50 L26,66" stroke-width="0.7" stroke-dasharray="2 3"/></svg>
