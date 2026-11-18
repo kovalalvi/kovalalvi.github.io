@@ -1,5 +1,6 @@
 """Paper glyphs in the "signals" style: each shows the paper's mechanism on (synthetic) data, no results.
-Same canvas, line weight, palette; dark mode is inside the SVG, so it works in <img>.
+Same canvas, line weight, palette. Colors come from the page's CSS variables: build.py inlines the SVG
+into the page, so it follows the theme toggle (as a plain <img> it falls back to the light colors).
 Run: python3 figs/papers.py  → static/fig/paper-*.svg"""
 import math
 import random
@@ -10,19 +11,16 @@ W, H = 240, 160  # 3:2
 X0, X1 = 14, 226  # time axis
 
 STYLE = """<style>
-  svg { --ink: #1c1b19; --mid: #9a968e; --faint: #e4e1da; --acc: #b4441f; }
-  @media (prefers-color-scheme: dark) {
-    svg { --ink: #e8e5df; --mid: #6f6b64; --faint: #2e2c29; --acc: #e8825c; }
-  }
-  .faint { fill: var(--faint); }
-  .l-ink { stroke: var(--ink); } .l-mid { stroke: var(--mid); } .l-acc { stroke: var(--acc); }
-  line, polyline { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  text { font-family: "Inter Tight", -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 9px; fill: var(--mid); letter-spacing: .02em; }
+  .g .faint { fill: var(--rule, #e4e1da); }
+  .g .l-ink { stroke: var(--text, #1c1b19); } .g .l-mid { stroke: var(--fig-mid, #9a968e); } .g .l-acc { stroke: var(--accent, #b4441f); }
+  .g line, .g polyline { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .g text { font-family: "Inter Tight", -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 9px; fill: var(--fig-mid, #9a968e); letter-spacing: .02em; }
 </style>"""
 
 
 def svg(body):
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}">{STYLE}{body}</svg>\n'
+    # class "g" scopes the <style> above: inlined into a page, it must not touch other SVGs
+    return f'<svg class="g" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}">{STYLE}{body}</svg>\n'
 
 
 def poly(pts, cls, width):

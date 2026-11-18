@@ -8,16 +8,19 @@
   --serif: "Source Serif 4", Charter, Georgia, serif;
   --sans: "Inter Tight", -apple-system, system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --fig-mid: #9a968e;
+  color-scheme: light;
 }
+/* dark: follows the OS unless the toggle chose light; or forced by the toggle */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #161514;
-    --text: #e8e5df;
-    --muted: #9a968e;
-    --rule: #2e2c29;
-    --accent: #e8825c;
-    --code-bg: #211f1d;
+  :root:not([data-theme="light"]) {
+    --bg: #161514; --text: #e8e5df; --muted: #9a968e; --rule: #2e2c29; --accent: #e8825c; --code-bg: #211f1d;
+    --fig-mid: #6f6b64; color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #161514; --text: #e8e5df; --muted: #9a968e; --rule: #2e2c29; --accent: #e8825c; --code-bg: #211f1d;
+  --fig-mid: #6f6b64; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -47,7 +50,14 @@ header.site, footer.site {
 header.site { padding: 2rem 0 3rem; }
 header.site .home { color: var(--text); font-weight: 600; }
 body:has(.intro) header.site .home { visibility: hidden; }  /* home page has the name as h1 */
+header.site nav { display: flex; align-items: center; }
 header.site nav a { margin-left: 1.25rem; color: var(--muted); }
+.theme-toggle {
+  margin-left: 1rem; padding: 0.25rem; border: 0; background: none; color: var(--muted); cursor: pointer;
+  display: inline-flex; line-height: 0;
+}
+.theme-toggle:hover { color: var(--text); }
+.theme-toggle svg { width: 1.05rem; height: 1.05rem; }
 footer.site { margin: 5rem 0 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); }
 footer.site a { color: var(--muted); }
 
@@ -98,7 +108,8 @@ th { font-weight: 600; }
 .pubs .ptitle:hover { color: var(--accent); }
 .pubs .venue { font-style: italic; color: var(--muted); }
 .pubs .paper { display: grid; grid-template-columns: 10.5rem 1fr; gap: 1.25rem; align-items: start; margin-bottom: 1.75rem; }
-.pubs .thumb { width: 100%; border: 1px solid var(--rule); border-radius: 6px; }
+.pubs .thumb { width: 100%; border: 1px solid var(--rule); border-radius: 6px; line-height: 0; }
+.pubs .thumb svg { width: 100%; height: auto; }
 
 /* post lists */
 ul.posts { list-style: none; padding: 0; }

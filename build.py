@@ -4,6 +4,7 @@
 # ///
 """Build the site into _site/.  Run: uv run build.py  (preview: python3 -m http.server -d _site)"""
 import html
+import re
 import shutil
 from datetime import datetime, timezone
 from email.utils import format_datetime
@@ -38,6 +39,12 @@ def write(url_path, text):
     path = OUT / url_path.lstrip("/") / "index.html" if url_path.endswith("/") else OUT / url_path.lstrip("/")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text)
+
+
+def inline_figs(page_html):
+    """<img class="thumb" src="/fig/x.svg"> → the SVG itself, so its colors follow the page theme."""
+    return re.sub(r'<img class="thumb" src="/fig/([\w-]+\.svg)"[^>]*>',
+                  lambda m: '<div class="thumb">' + (ROOT / "static/fig" / m.group(1)).read_text() + "</div>", page_html)
 
 
 def obsidian_lists(md):
@@ -121,7 +128,7 @@ def main():
 
     posts = sorted((read_post(p) for p in (ROOT / "posts").glob("*.md")), key=lambda p: p["date"], reverse=True)
 
-    home = (ROOT / "templates/home.html").read_text().replace("{{posts}}", post_list(posts[:5]))
+    home = inline_figs((ROOT / "templates/home.html").read_text().replace("{{posts}}", post_list(posts[:5])))
     write("/", page("Aleksandr Kovalev", "AI models for intracortical brain-computer interfaces.", "/", home))
     write("/blog/", page("Blog · Aleksandr Kovalev", "Notes on brain-computer interfaces and AI.", "/blog/",
                          f"<h1>Blog</h1>\n{post_list(posts, with_description=True)}"))
