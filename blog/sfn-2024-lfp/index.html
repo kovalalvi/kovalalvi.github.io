@@ -63,7 +63,7 @@
 <p>We need to split a 1D signal into N components while keeping the time resolution. So (1, Time) → (N, Time).</p>
 <p>The first thing that comes to mind: let's train an autoencoder. Pass the signal through an encoder and decoder and reconstruct the original.</p>
 <p>Obviously, done head-on this gives nothing: your components will just repeat the input signal. You can add different noise to the input and reconstruct the original signal. In my case it did not work: my components looked like a smoothed input signal. Various sparse regularizations did not give what I wanted either.</p>
-<p><strong>About DeepPhase.</strong> By chance I came across <a href="https://doi.org/10.1145/3528223.3530178">DeepPhase</a> (<a href="https://t.me/neural_cell/162">my post about it, RU</a>), and off it went. In short, they added a sinusoidal approximation for the components and used these sinusoids as the input to the decoder. As a result they always have a periodic signal and can extract phase information. The results look great.</p>
+<p><strong>About DeepPhase.</strong> By chance I came across <a href="https://doi.org/10.1145/3528223.3530178">DeepPhase</a>, and off it went. In short, they added a sinusoidal approximation for the components and used these sinusoids as the input to the decoder. As a result they always have a periodic signal and can extract phase information. The results look great.</p>
 <p>I tried to do the same. It came out fun, but the reconstruction was really poor. Plus it was hard to get temporal coherence.</p>
 <p>So, based on this idea, I decided to make it a regularization: directly force our latents to be similar to sinusoids. And feed the decoder not only the sinusoids, but a weighted average of the sinusoids and the latents.</p>
 <p>This way the encoder returns latents that look like sinusoids. At test time the approximation part could then be removed.</p>
@@ -91,7 +91,7 @@
 <p>For sure, it needs improvements. The model needs to use context information about sessions and electrodes. It should also work with all electrodes at once, so we could reduce the dimensionality.</p>
 <h2 id="about-the-us">About the US</h2>
 <p>In June I was sent to administrative processing after just a couple of questions at the consulate in Serbia. Silence since then. So I did not go to the US, and I never started that PhD. But a nice poster came out of it. Not bad either.</p>
-<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/192">Discuss on Telegram (RU)</a></div>
+<div class="post-footer"><a href="/blog/">← All posts</a></div>
 </article>
 <script src="/toc.js" defer></script>
 </main>

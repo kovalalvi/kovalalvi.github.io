@@ -57,7 +57,7 @@
 <h2 id="what-id-try-on-this-data">What I'd try on this data</h2>
 <p>The data isn't released yet (access will be decided after peer review), but here's what I'd test. The interesting question is whether one model generalizes to a new patient: hand gestures were recorded in 21 patients, so train on 20 and test on the 21st. In speech BCI, Fogg et al. 2026 did something similar: a shared model with a separate input layer per person cut offline WER by 51% on average versus single-person models. I'd pretrain that shared model as an MAE on all 180 hours (87k electrodes; the authors mention foundation models themselves), then fine-tune on the small tasks (18 to 200 examples). For electrode position I'd add a relative embedding from functional connectivity, not only the template-brain coordinate, which has up to 2 mm error.</p>
 <p>Paper: Ho, Barth, Dister et al. <a href="https://doi.org/10.64898/2026.09.24.754261">Toward a whole-brain interface enabled by high-resolution surface electrophysiology</a>. bioRxiv, 2026.</p>
-<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/345">Discuss on Telegram (RU)</a></div>
+<div class="post-footer"><a href="/blog/">← All posts</a></div>
 </article>
 <script src="/toc.js" defer></script>
 </main>
