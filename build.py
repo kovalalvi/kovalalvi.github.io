@@ -110,7 +110,8 @@ def blog_index(posts):
 
 
 def post_page(p):
-    return f"""<article>
+    toc = ' data-toc="h2"' if p.get("toc") == "h2" else ""
+    return f"""<article{toc}>
 <header class="title-block">
 <h1>{html.escape(p["title"])}</h1>
 <p class="dek">{html.escape(p["description"])}</p>
