@@ -2,6 +2,7 @@
 title: Brain-computer interfaces in China: 12 companies, money and data
 description: China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and put $922M into BCI in 2026. I went through 12 companies.
 tag: review
+image: /fig/china/map-preview.png
 telegram: https://t.me/neural_cell/354
 ---
 
@@ -14,13 +15,18 @@ Then I found out that in China a hospital can start a human study of an implant 
 
 And money. In 2025 Chinese BCI raised $114M, in 2026 already $922M, almost the same as the US with $932M ([New Market Pitch](https://newmarketpitch.com/blogs/news/brain-computer-interface-funding-trends)).
 
+<img class="svg wide" src="/fig/china/map.svg" alt="Map of China with the twelve companies and how much each raised">
+
 Now the companies.
+
+<img class="svg wide" src="/fig/china/section.svg" alt="Cross-section of the head with each device at its depth">
+<p class="meta">How deep each device goes. The vision implants are in their own section below.</p>
 
 ## Invasive
 
 ### [Neuracle](https://www.neuracle.cn)
 
-<p class="meta">Shanghai · 2011 · valuation ~$595M · last round $45M (11.2025), preparing an IPO</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-neo.svg" alt=""><dl><dt>Where</dt><dd>Shanghai</dd><dt>Founded</dt><dd>2011</dd><dt>Raised</dt><dd>not public (valuation ~$595M)</dd><dt>Last round</dt><dd>$45M (11.2025), preparing an IPO</dd><dt>Data</dt><dd><span class="ev pre">preprint, one patient</span></dd></dl></div>
 
 **what:** the first approved implant, NEO. For people with tetraplegia after a neck injury: close and open the hand.
 - Basically 8 contacts on top of the dura, nothing goes into the cortex. No battery, it works while a coil sits on the head. An external computer decodes and inflates a glove on the hand
@@ -29,7 +35,7 @@ Now the companies.
 
 ### [StairMed](https://www.stairmed.com/en)
 
-<p class="meta">Shanghai · 2021 · $387M · last round ~$208M (H2 2026), preparing an IPO</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-threads.svg" alt=""><dl><dt>Where</dt><dd>Shanghai</dd><dt>Founded</dt><dd>2021</dd><dt>Raised</dt><dd>$387M</dd><dt>Last round</dt><dd>~$208M (H2 2026), preparing an IPO</dd><dt>Data</dt><dd><span class="ev paper">paper on recording, not decoding</span></dd></dl></div>
 
 **what:** the closest to Neuralink: flexible electrodes that actually go into the cortex, 256 channels.
 - 42 implants, by their count already more than Neuralink
@@ -38,7 +44,7 @@ Now the companies.
 
 ### [NeuroXess](https://www.neuroxess.com)
 
-<p class="meta">Shanghai · 2021 · ~$168M · last round $104M (10.2026)</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-grid.svg" alt=""><dl><dt>Where</dt><dd>Shanghai</dd><dt>Founded</dt><dd>2021</dd><dt>Raised</dt><dd>~$168M</dd><dt>Last round</dt><dd>$104M (10.2026)</dd><dt>Data</dt><dd><span class="ev paper">peer-reviewed decoding paper</span></dd></dl></div>
 
 **what:** basically a Chinese Precision. A flexible micro-ECoG grid sits on the cortex and does not penetrate it. 256 channels vs 1024 at Precision, but they have a fully implanted version with a battery.
 - 65 clinical cases, now a registration trial in 16 hospitals
@@ -46,7 +52,7 @@ Now the companies.
 
 ### NeuCyber / Beinao
 
-<p class="meta">Beijing · 2023 · ~$30M from the Beijing government, no private rounds</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-pad.svg" alt=""><dl><dt>Where</dt><dd>Beijing</dd><dt>Founded</dt><dd>2023</dd><dt>Raised</dt><dd>~$30M from the Beijing government</dd><dt>Last round</dt><dd>no private rounds</dd><dt>Data</dt><dd><span class="ev claim">numbers from the institute only</span></dd></dl></div>
 
 **what:** a state project of the Beijing brain institute [CIBR](https://www.cibr.ac.cn).
 - Beinao-1 sits above the dura, 128 channels, decodes ~100 Chinese words. 40+ patients, but the numbers differ between sources
@@ -54,9 +60,11 @@ Now the companies.
 
 **New wave of intracortical startups.** Lots of money, no clinical data at all:
 
-- **[AIT](https://www.aitbci.com) (Active Intelligence Technologies) · Shanghai · 2026 · ~$118M · last round $69M (11.2026)**. A record for an angel round. Ultra-flexible electrodes, 1024 channels
-- **[Zhiran / BCIFlex](https://www.bciflex.com) · Beijing · 2022 · $93M · last round $45M (02.2026)**. Ultra-thin flexible electrodes
-- **Zhonghua · Wuhan · 2021 · no rounds, funded personally by the chairman of Guide Infrared**. Claims 65,536 channels, "20x more than Neuralink". No paper
+<div class="cocards">
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-threads.svg" alt=""><h4><a href="https://www.aitbci.com">AIT</a></h4><dl><dt>Where</dt><dd>Shanghai</dd><dt>Founded</dt><dd>2026</dd><dt>Raised</dt><dd>~$118M</dd><dt>Last round</dt><dd>$69M (11.2026)</dd><dt>Data</dt><dd><span class="ev none">no human data</span></dd></dl><p class="note">Active Intelligence Technologies. A record for an angel round. Ultra-flexible electrodes, 1024 channels</p></div>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-threads.svg" alt=""><h4><a href="https://www.bciflex.com">Zhiran / BCIFlex</a></h4><dl><dt>Where</dt><dd>Beijing</dd><dt>Founded</dt><dd>2022</dd><dt>Raised</dt><dd>$93M</dd><dt>Last round</dt><dd>$45M (02.2026)</dd><dt>Data</dt><dd><span class="ev none">no human data</span></dd></dl><p class="note">Ultra-thin flexible electrodes</p></div>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-unknown.svg" alt=""><h4>Zhonghua</h4><dl><dt>Where</dt><dd>Wuhan</dd><dt>Founded</dt><dd>2021</dd><dt>Raised</dt><dd>no rounds</dd><dt>Last round</dt><dd>funded personally by the chairman of Guide Infrared</dd><dt>Data</dt><dd><span class="ev none">no paper</span></dd></dl><p class="note">Claims 65,536 channels, “20x more than Neuralink”</p></div>
+</div>
 
 ## Vision
 
@@ -64,7 +72,7 @@ This is the most interesting part for me: we work with a Utah array in V1 of a b
 
 ### Mindtrix
 
-<p class="meta">2024 · >$74M in 2026 · last round pre-A+ (11.2026)</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-tiles.svg" alt=""><dl><dt>Where</dt><dd>Suzhou (one source)</dd><dt>Founded</dt><dd>2024</dd><dt>Raised</dt><dd>&gt;$74M in 2026</dd><dt>Last round</dt><dd>pre-A+ (11.2026)</dd><dt>Data</dt><dd><span class="ev claim">company claims, one sighted patient</span></dd></dl></div>
 
 **what:** visual cortex stimulation, 1024 channels.
 - Data so far from one sighted patient with epilepsy, an acute experiment. He saw "shapes and colors", phosphene positions matched in 95% of cases, according to the company
@@ -72,13 +80,13 @@ This is the most interesting part for me: we work with a Utah array in V1 of a b
 
 ### Xinsheng Shijie
 
-<p class="meta">Beijing · 2026 · seed ~$15M (06.2026)</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-tiles.svg" alt=""><dl><dt>Where</dt><dd>Beijing</dd><dt>Founded</dt><dd>2026</dd><dt>Raised</dt><dd>~$15M</dd><dt>Last round</dt><dd>seed (06.2026)</dd><dt>Data</dt><dd><span class="ev none">preclinical</span></dd></dl></div>
 
 **what:** also a cortical visual prosthesis, still preclinical. Their co-founder is the same [Li Yuanning](https://yuanningli.github.io) from the NeuroXess paper, a former postdoc of Edward Chang.
 
 ### [NanoChap](https://www.nanochap.com)
 
-<p class="meta">Hangzhou · 2014 · ~$149M · last round $74M (11.2026)</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-eye.svg" alt=""><dl><dt>Where</dt><dd>Hangzhou</dd><dt>Founded</dt><dd>2014</dd><dt>Raised</dt><dd>~$149M</dd><dt>Last round</dt><dd>$74M (11.2026)</dd><dt>Data</dt><dd><span class="ev claim">clinical trial, no paper yet</span></dd></dl></div>
 
 **what:** a retinal implant, 320 channels, already in a clinical trial.
 - a woman who had not seen for ~20 years recognizes some letters and writes the word "China" in Chinese characters
@@ -93,13 +101,13 @@ Europe for comparison:
 
 ### [BrainCo](https://www.brainco.tech)
 
-<p class="meta">Hangzhou and Boston · 2015 · ~$370M · last round $286M (01.2026)</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-band.svg" alt=""><dl><dt>Where</dt><dd>Hangzhou and Boston</dd><dt>Founded</dt><dd>2015</dd><dt>Raised</dt><dd>~$370M</dd><dt>Last round</dt><dd>$286M (01.2026)</dd><dt>Data</dt><dd><span class="ev claim">products on sale</span></dd></dl></div>
 
 **what:** EEG headbands, a bionic hand on sEMG and hands for humanoids. The Hong Kong IPO was postponed.
 
 ### [Gestala](https://www.gestala.com)
 
-<p class="meta">Chengdu and Shanghai · 2026 · $85M in six months · last round ~$63M (07.2026)</p>
+<div class="cocard"><img class="svg dev" src="/fig/china/dev-waves.svg" alt=""><dl><dt>Where</dt><dd>Chengdu and Shanghai</dd><dt>Founded</dt><dd>2026</dd><dt>Raised</dt><dd>$85M in six months</dd><dt>Last round</dt><dd>~$63M (07.2026)</dd><dt>Data</dt><dd><span class="ev claim">company numbers, 30+ cases</span></dd></dl></div>
 
 **what:** ultrasound without an implant plus a brain foundation model.
 - first indication: chronic pain, 30+ cases

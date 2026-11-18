@@ -46,9 +46,10 @@ def write(url_path, text):
 
 
 def inline_figs(page_html):
-    """<img class="thumb" src="/fig/x.svg"> → the SVG itself, so its colors follow the page theme."""
-    return re.sub(r'<img class="thumb" src="/fig/([\w-]+\.svg)"[^>]*>',
-                  lambda m: '<div class="thumb">' + (ROOT / "static/fig" / m.group(1)).read_text() + "</div>", page_html)
+    """<img class="thumb|svg ..." src="/fig/x.svg"> → the SVG itself in a div with the same class,
+    so its colors follow the page theme (a plain <img> would keep the light colors)."""
+    return re.sub(r'<img class="((?:thumb|svg)[\w -]*)" src="/fig/([\w/-]+\.svg)"[^>]*>',
+                  lambda m: f'<div class="{m.group(1)}">' + (ROOT / "static/fig" / m.group(2)).read_text() + "</div>", page_html)
 
 
 def obsidian_lists(md):
@@ -153,7 +154,7 @@ def main():
     write("/blog/", page("Blog · Aleksandr Kovalev", "Notes on brain-computer interfaces and AI.", "/blog/",
                          blog_index(posts)))
     for p in posts:
-        write(p["url"], page(p["title"], p["description"], p["url"], post_page(p), og_type="article", image=p.get("image")))
+        write(p["url"], page(p["title"], p["description"], p["url"], inline_figs(post_page(p)), og_type="article", image=p.get("image")))
     write("/feed.xml", feed(posts))
     print(f"built {len(posts)} posts → {OUT}")
 

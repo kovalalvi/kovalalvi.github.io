@@ -5,6 +5,7 @@ Personal site and blog. Plain HTML/CSS, one Python build script, no framework.
 - `templates/home.html` — the home page. `{{posts}}` becomes the 5 latest posts.
 - `templates/base.html` — the frame around every page.
 - `posts/YYYY-MM-DD-slug.md` — a post, served at `/blog/slug/`. The date is when the post was written (the vault draft's date or first commit), not the day it went on the site. Front matter: `title`, `description`, `tag` (my work / review / digest / tutorial), optional `telegram` (link to the RU post), `image` (preview card) and `affiliation` (default UMH, Spain).
+- `figs/*.py` — generators for SVG figures in `static/fig/` (`papers.py`: paper thumbnails; `china.py`: map, head cross-section and device icons for the China post). In a post, `<img class="svg" src="/fig/x.svg">` is inlined at build, so the figure follows the theme; add `wide` to break out of the text column.
 - `static/` — copied as-is: `style.css`, `cv.pdf`, images.
 
 Build and preview:

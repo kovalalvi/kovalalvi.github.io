@@ -1,0 +1,11 @@
+<svg class="cn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" aria-hidden="true"><style>
+  .cn .ink { stroke: var(--text, #1c1b19); fill: none; } .cn .inkf { fill: var(--text, #1c1b19); }
+  .cn .acc { stroke: var(--accent, #0e7470); fill: none; } .cn .accf { fill: var(--accent, #0e7470); }
+  .cn .mid { stroke: var(--fig-mid, #9a968e); fill: none; } .cn .midf { fill: var(--fig-mid, #9a968e); }
+  .cn .rulef { fill: var(--rule, #e4e1da); } .cn .rule { stroke: var(--rule, #e4e1da); fill: none; }
+  .cn .bgf { fill: var(--bg, #fbfaf7); } .cn .softf { fill: var(--code-bg, #f1efe9); }
+  .cn .bubble { fill: var(--accent, #0e7470); fill-opacity: .16; stroke: var(--accent, #0e7470); }
+  .cn text { font-family: "Inter Tight", -apple-system, "Helvetica Neue", Arial, sans-serif; fill: var(--muted, #6b6862); }
+  .cn .serif { font-family: "Source Serif 4", Georgia, serif; font-style: italic; fill: var(--text, #1c1b19); }
+  .cn .strong { fill: var(--text, #1c1b19); }
+</style><rect class="ink" x="34" y="24" width="52" height="52" stroke-width="1" stroke-dasharray="3 3"/><text class="serif" x="60" y="61" font-size="30" text-anchor="middle">?</text></svg>
