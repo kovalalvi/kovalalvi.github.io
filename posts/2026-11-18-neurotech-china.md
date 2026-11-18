@@ -7,7 +7,7 @@ image: /fig/china/map-preview.png
 
 <img class="svg wide" src="/fig/china/map.svg" alt="Map of China with the twelve companies and how much each raised">
 
-Recently Bashar Badran from the Chinese startup Gestala visited us. He used to work at Neuralink, and now he runs clinical and science there. He told us how strong neurotech in China is right now. At AAAI I also talked a lot with a colleague from a BCI lab in Beijing. Then I got sick, stayed at home and finally decided to figure out what is really going on there.
+Recently Bashar Badran from the Chinese startup Gestala visited us. He used to work at Neuralink, and now he runs clinical and science there. He told us how strong neurotech in China is right now. At AAAI I also talked a lot with a colleague from a BCI lab in Beijing. So I decided to figure out what is really going on there.
 
 First thing I found: on March 13, 2026 China approved NEO by Neuracle, the world's first implantable brain-computer interface as a product. 9 days later it got an insurance billing code, 11 days later it was on public procurement lists ([MIT Tech Review](https://www.technologyreview.com/2026/06/01/1138133/china-world-first-brain-chip/)).
 
