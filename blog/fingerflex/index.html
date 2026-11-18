@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FingerFlex: inferring finger trajectories from ECoG signals</title>
+<meta name="description" content="Our preprint FingerFlex: a simple U-Net-like encoder-decoder on wavelet features of ECoG predicts finger movements, correlation up to 0.74 on BCI Competition IV.">
+<meta property="og:title" content="FingerFlex: inferring finger trajectories from ECoG signals">
+<meta property="og:description" content="Our preprint FingerFlex: a simple U-Net-like encoder-decoder on wavelet features of ECoG predicts finger movements, correlation up to 0.74 on BCI Competition IV.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/fingerflex/">
+<meta property="og:image" content="https://kovalalvi.github.io/img/fingerflex/demo-thumb.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/fingerflex/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css?v=0bb7e987">
+<script>
+  // theme toggle: a saved choice wins over the OS setting; set before paint to avoid a flash
+  try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  function toggleTheme() {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  }
+</script>
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a><button class="theme-toggle" onclick="toggleTheme()" aria-label="Switch light or dark theme" title="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button></nav>
+</header>
+<main>
+<article>
+<header class="title-block">
+<h1>FingerFlex: inferring finger trajectories from ECoG signals</h1>
+<p class="dek">Our preprint FingerFlex: a simple U-Net-like encoder-decoder on wavelet features of ECoG predicts finger movements, correlation up to 0.74 on BCI Competition IV.</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>ALVI Labs</div>
+  <div><span>Published</span>Apr 24, 2023</div>
+  <div><span>Type</span>own work</div>
+</div>
+</header>
+<p>We are happy to share our preprint FingerFlex. We propose a new state-of-the-art model for predicting finger movements from brain activity (ECoG).</p>
+<p><a href="https://arxiv.org/abs/2211.01960">paper</a> · <a href="https://github.com/Irautak/FingerFlex">code</a></p>
+<p>Authors: Vlad Lomtev, Aleksandr Kovalev, Alex Timchenko.</p>
+<video src="/img/fingerflex/demo.mp4" poster="/img/fingerflex/demo-thumb.jpg" controls muted playsinline loop></video>
+
+<p><strong>Architecture.</strong> We use a convolutional encoder-decoder architecture adapted for finger movement regression on electrocorticographic (ECoG) brain data. We show great performance with a simple U-Net-inspired architecture. As ECoG features we used the wavelet transform.</p>
+<p><strong>Data.</strong> We use open-source motor-brain datasets: BCI Competition IV and the Stanford dataset. These datasets have brain activity and finger movements recorded at the same time.</p>
+<p><strong>Results.</strong> We beat all competitors on BCI Competition IV with a correlation coefficient between true and predicted trajectories of up to 0.74.</p>
+<p>The video above is a demonstration of our model on validation data.</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/125">Discuss on Telegram (RU)</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+</body>
+</html>

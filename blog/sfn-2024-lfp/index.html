@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extracting the oscillatory features of local field potentials using neural networks</title>
+<meta name="description" content="My SfN 2024 poster. We force an autoencoder to learn sinusoid-like components from LFP with a periodic regularization of the latent space.">
+<meta property="og:title" content="Extracting the oscillatory features of local field potentials using neural networks">
+<meta property="og:description" content="My SfN 2024 poster. We force an autoencoder to learn sinusoid-like components from LFP with a periodic regularization of the latent space.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/sfn-2024-lfp/">
+<meta property="og:image" content="https://kovalalvi.github.io/img/sfn-2024/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/sfn-2024-lfp/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css?v=0bb7e987">
+<script>
+  // theme toggle: a saved choice wins over the OS setting; set before paint to avoid a flash
+  try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  function toggleTheme() {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  }
+</script>
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a><button class="theme-toggle" onclick="toggleTheme()" aria-label="Switch light or dark theme" title="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button></nav>
+</header>
+<main>
+<article>
+<header class="title-block">
+<h1>Extracting the oscillatory features of local field potentials using neural networks</h1>
+<p class="dek">My SfN 2024 poster. We force an autoencoder to learn sinusoid-like components from LFP with a periodic regularization of the latent space.</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>University of Utah</div>
+  <div><span>Published</span>Oct 11, 2024</div>
+  <div><span>Type</span>own work</div>
+</div>
+</header>
+<p>I'm happy to tell you about my poster from SfN 24.</p>
+<p class="meta">A. Kovalev, K. Clark, G. Weng, A. Akbarian, B. Noudoost, N. Nategh. University of Utah. Neuroscience 2024, poster PSTR383.04.</p>
+
+<p><img alt="The SfN 2024 poster" src="/img/sfn-2024/poster.jpg" /></p>
+<p><strong>What:</strong> we force an autoencoder (AE) to learn meaningful components from LFP signals.</p>
+<p><strong>How it works.</strong> We implement a periodic regularization module:</p>
+<ul>
+<li>decompose the LFP into components with the encoder</li>
+<li>apply a sinusoidal approximation to each component (torch.fft)</li>
+<li>push our latents to be similar to the approximation and independent from each other</li>
+<li>a random weighted average of the latents and the sinusoids goes to the decoder</li>
+</ul>
+<p><strong>Architecture.</strong> An AE with residual conv layers and periodic regularization of the latent space.</p>
+<p><strong>Our losses:</strong></p>
+<ul>
+<li>reconstruction loss: MSE</li>
+<li>TV loss to force the latents to be smooth</li>
+<li>maximizing the cosine similarity between the latents and the sinusoids</li>
+<li>minimizing the cross-correlation of the latents</li>
+</ul>
+<p><strong>My thoughts.</strong> We got a frequency decomposition not of the input data, but of some nonlinear features of the input data. That's the most interesting part, in my view.</p>
+<p>For sure, it needs improvements. The model needs to use context information about sessions and electrodes. It should also work with all electrodes at once, so we could reduce the dimensionality.</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/190">Discuss on Telegram (RU)</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+</body>
+</html>
