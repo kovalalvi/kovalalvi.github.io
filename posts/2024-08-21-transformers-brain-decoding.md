@@ -1,6 +1,6 @@
 ---
 title: Transformers for brain decoding: POYO, NDT2 and MtM
-description: Three foundation models for spikes: how they train across sessions and animals, what they use as a token, and how they pretrain. Plus what I would try next.
+description: How three foundation models for spikes work, and what I would try next.
 tag: review
 image: /img/transformers-brain-decoding/poyo.jpg
 ---

@@ -1,6 +1,6 @@
 ---
 title: Smart stimulation patterns for visual prostheses
-description: Visual prostheses still use the same fixed stimulation patterns. A review of four papers that move toward models of perception, patient feedback and closed loop.
+description: Four papers on stimulation that adapts to the patient.
 tag: review
 image: /img/smart-stimulation/papers.jpg
 ---

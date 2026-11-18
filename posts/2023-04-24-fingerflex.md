@@ -1,6 +1,6 @@
 ---
 title: FingerFlex: inferring finger trajectories from ECoG signals
-description: Our preprint FingerFlex: a simple U-Net-like encoder-decoder on wavelet features of ECoG predicts finger movements, correlation up to 0.74 on BCI Competition IV.
+description: A simple U-Net on ECoG predicts finger movements, correlation up to 0.74.
 tag: my work
 affiliation: ALVI Labs
 image: /img/fingerflex/demo-thumb.jpg

@@ -1,6 +1,6 @@
 ---
 title: A whole-brain interface from 70 patients: the Precision Neuroscience atlas
-description: Precision recorded 70 patients with 1024-electrode surface grids and built an atlas of cortex, brainstem and spinal cord. What they found, and what I would train on this data.
+description: What Precision found in 70 patients with 1024-electrode grids, and what I would train on it.
 tag: review
 image: /img/precision-atlas/fig1.jpg
 ---

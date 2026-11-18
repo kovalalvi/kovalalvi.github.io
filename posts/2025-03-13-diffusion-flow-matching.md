@@ -1,6 +1,6 @@
 ---
 title: Understanding generative models: diffusion and flow matching
-description: How DDPM and flow matching work at a high level, with the training and sampling code. Flow matching is a straight line from noise to data and an ODE solver.
+description: How diffusion and flow matching work, with code.
 tag: tutorial
 image: /img/diffusion/ddpm-algorithms.jpg
 ---

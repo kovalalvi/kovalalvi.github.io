@@ -1,6 +1,6 @@
 ---
 title: Brain-computer interfaces in China: 12 companies, money and data
-description: China approved the first implantable BCI, lets hospitals run implant studies on their own and raised over $1B in six months.
+description: China approved the first implantable BCI and raised $1B for BCI in six months.
 tag: review
 image: /fig/china/map-preview.png
 ---
