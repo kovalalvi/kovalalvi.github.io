@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Extracting the oscillatory features of local field potentials using neural networks</title>
-<meta name="description" content="My SfN 2024 poster. We force an autoencoder to learn sinusoid-like components from LFP with a periodic regularization of the latent space.">
-<meta property="og:title" content="Extracting the oscillatory features of local field potentials using neural networks">
-<meta property="og:description" content="My SfN 2024 poster. We force an autoencoder to learn sinusoid-like components from LFP with a periodic regularization of the latent space.">
+<title>My SfN 2024 poster: oscillations from LFP with an autoencoder, and how I never got to the US</title>
+<meta name="description" content="How I made a poster for SfN 24 with the University of Utah: an autoencoder with periodic regularization that pulls sinusoid-like components out of LFP. And why I never went to Chicago.">
+<meta property="og:title" content="My SfN 2024 poster: oscillations from LFP with an autoencoder, and how I never got to the US">
+<meta property="og:description" content="How I made a poster for SfN 24 with the University of Utah: an autoencoder with periodic regularization that pulls sinusoid-like components out of LFP. And why I never went to Chicago.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kovalalvi.github.io/blog/sfn-2024-lfp/">
 <meta property="og:image" content="https://kovalalvi.github.io/img/sfn-2024/poster.jpg">
@@ -36,8 +36,8 @@
 <main>
 <article>
 <header class="title-block">
-<h1>Extracting the oscillatory features of local field potentials using neural networks</h1>
-<p class="dek">My SfN 2024 poster. We force an autoencoder to learn sinusoid-like components from LFP with a periodic regularization of the latent space.</p>
+<h1>My SfN 2024 poster: oscillations from LFP with an autoencoder, and how I never got to the US</h1>
+<p class="dek">How I made a poster for SfN 24 with the University of Utah: an autoencoder with periodic regularization that pulls sinusoid-like components out of LFP. And why I never went to Chicago.</p>
 <div class="byline">
   <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
   <div><span>Affiliation</span>University of Utah</div>
@@ -45,11 +45,30 @@
   <div><span>Type</span>own work</div>
 </div>
 </header>
-<p>I'm happy to tell you about my poster from SfN 24.</p>
-<p class="meta">A. Kovalev, K. Clark, G. Weng, A. Akbarian, B. Noudoost, N. Nategh. University of Utah. Neuroscience 2024, poster PSTR383.04.</p>
+<p>I want to tell you how I made a poster for SfN 24 in Chicago together with the University of Utah, but never went to the US.</p>
+<p class="meta">A. Kovalev, K. Clark, G. Weng, A. Akbarian, B. Noudoost, N. Nategh. University of Utah. Neuroscience 2024, poster PSTR383.04. <a href="/img/sfn-2024/kovalev-sfn-2024-poster.pdf">Full poster (PDF)</a></p>
 
-<p><img alt="The SfN 2024 poster" src="/img/sfn-2024/poster.jpg" /></p>
-<p><strong>What:</strong> we force an autoencoder (AE) to learn meaningful components from LFP signals.</p>
+<p><a href="/img/sfn-2024/kovalev-sfn-2024-poster.pdf"><img alt="The SfN 2024 poster" src="/img/sfn-2024/poster.jpg" /></a></p>
+<h2 id="background">Background</h2>
+<p>In spring I got an unexpected offer from the University of Utah: a PhD researcher position with Neda Nategh. I accepted, and already in May we thought it would be cool to start doing something before the studies (August). So we right away submitted an abstract to SfN 24 (the largest neuroscience conference).</p>
+<p>I'll say it right away: it is great motivation not to drop a project when you submit an abstract with only a sketch of the future work.</p>
+<p>For me it was a great chance to get into the topic quickly and meet cool people at the conference. Nice, I thought, I had never been to such a conference in person.</p>
+<h2 id="the-context-of-the-work">The context of the work</h2>
+<p>My advisor has worked in computational neuroscience for a long time. Her lab studies how information is encoded in the visual cortex of monkeys (and not only there). She holds that the firing rate alone is not enough to encode all the information. There are other mechanisms, for example phase coding.</p>
+<p>In simple words: it matters not only how often a neuron spikes, but also when the spikes happen relative to some common signal (a reference). Phase coding shows when the neuron fired relative to the reference (in which phase of this signal).</p>
+<p>So we need to learn to extract this periodic (reference) signal from the LFP. Standard frequency decomposition does not work very well here because of the different sources and the noise.</p>
+<p>It would be great if a model learned to extract good periodic components by itself. Then we would also test phase coding on them.</p>
+<h2 id="research">Research</h2>
+<p>So I went to look at what deep learning has for this.</p>
+<p>We need to split a 1D signal into N components while keeping the time resolution. So (1, Time) → (N, Time).</p>
+<p>The first thing that comes to mind: let's train an autoencoder. Pass the signal through an encoder and decoder and reconstruct the original.</p>
+<p>Obviously, done head-on this gives nothing: your components will just repeat the input signal. You can add different noise to the input and reconstruct the original signal. In my case it did not work: my components looked like a smoothed input signal. Various sparse regularizations did not give what I wanted either.</p>
+<p><strong>About DeepPhase.</strong> By chance I came across <a href="https://doi.org/10.1145/3528223.3530178">DeepPhase</a> (<a href="https://t.me/neural_cell/162">my post about it, RU</a>), and off it went. In short, they added a sinusoidal approximation for the components and used these sinusoids as the input to the decoder. As a result they always have a periodic signal and can extract phase information. The results look great.</p>
+<p>I tried to do the same. It came out fun, but the reconstruction was really poor. Plus it was hard to get temporal coherence.</p>
+<p>So, based on this idea, I decided to make it a regularization: directly force our latents to be similar to sinusoids. And feed the decoder not only the sinusoids, but a weighted average of the sinusoids and the latents.</p>
+<p>This way the encoder returns latents that look like sinusoids. At test time the approximation part could then be removed.</p>
+<p><img alt="Autoencoder with periodic regularization and the losses" src="/img/sfn-2024/model.jpg" /></p>
+<p><strong>What we do:</strong> we force an autoencoder (AE) to learn meaningful components from LFP signals.</p>
 <p><strong>How it works.</strong> We implement a periodic regularization module:</p>
 <ul>
 <li>decompose the LFP into components with the encoder</li>
@@ -65,9 +84,14 @@
 <li>maximizing the cosine similarity between the latents and the sinusoids</li>
 <li>minimizing the cross-correlation of the latents</li>
 </ul>
+<h2 id="result">Result</h2>
+<p>It started to work. The signal is reconstructed, and the components look periodic and different from each other. It came out interesting, but still raw.</p>
+<p><img alt="A plain AE vs an AE with periodic regularization" src="/img/sfn-2024/ae-vs-periodic.jpg" /></p>
 <p><strong>My thoughts.</strong> We got a frequency decomposition not of the input data, but of some nonlinear features of the input data. That's the most interesting part, in my view.</p>
 <p>For sure, it needs improvements. The model needs to use context information about sessions and electrodes. It should also work with all electrodes at once, so we could reduce the dimensionality.</p>
-<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/190">Discuss on Telegram (RU)</a></div>
+<h2 id="about-the-us">About the US</h2>
+<p>In June I was sent to administrative processing after just a couple of questions at the consulate in Serbia. Silence since then. So I did not go to the US, and I never started that PhD. But a nice poster came out of it. Not bad either.</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/192">Discuss on Telegram (RU)</a></div>
 </article>
 <script src="/toc.js" defer></script>
 </main>
