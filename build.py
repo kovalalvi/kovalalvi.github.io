@@ -63,7 +63,7 @@ def read_post(path):
         **meta,
         "date": date,
         "url": f"/blog/{path.stem[11:]}/",
-        "html": markdown.markdown(obsidian_lists(body),extensions=["extra", "sane_lists"]),
+        "html": markdown.markdown(obsidian_lists(body),extensions=["extra", "sane_lists", "toc"]),
     }
 
 
@@ -83,7 +83,8 @@ def post_page(p):
 <div class="meta">{p["date"]:%B %d, %Y} · {p["tag"]}</div></header>
 {p["html"]}
 <div class="post-footer"><a href="/blog/">← All posts</a>{discuss}</div>
-</article>"""
+</article>
+<script src="/toc.js" defer></script>"""
 
 
 def feed(posts):

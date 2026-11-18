@@ -17,27 +17,35 @@ Now the companies.
 
 ## Invasive
 
-**[Neuracle](https://www.neuracle.cn) · Shanghai · 2011 · valuation ~$595M · last round $45M (11.2025), preparing an IPO**
+### [Neuracle](https://www.neuracle.cn)
+
+<p class="meta">Shanghai · 2011 · valuation ~$595M · last round $45M (11.2025), preparing an IPO</p>
 
 **what:** the first approved implant, NEO. For people with tetraplegia after a neck injury: close and open the hand.
 - Basically 8 contacts on top of the dura, nothing goes into the cortex. No battery, it works while a coil sits on the head. An external computer decodes and inflates a glove on the hand
 - One patient: F1 0.91 over 9 months at home ([medRxiv](https://www.medrxiv.org/content/10.1101/2024.09.05.24313041)). My first thought was that EEG has done the same for years. I found a similar patient: ~70% accuracy after a year of training ([Rohm 2013](https://doi.org/10.1016/j.artmed.2013.07.004)). Different metrics, but the gap is clear
 - A kit costs $71k, 13 sold since July. No paper yet on the 32 patients from the trial
 
-**[StairMed](https://www.stairmed.com/en) · Shanghai · 2021 · $387M · last round ~$208M (H2 2026), preparing an IPO**
+### [StairMed](https://www.stairmed.com/en)
+
+<p class="meta">Shanghai · 2021 · $387M · last round ~$208M (H2 2026), preparing an IPO</p>
 
 **what:** the closest to Neuralink: flexible electrodes that actually go into the cortex, 256 channels.
 - 42 implants, by their count already more than Neuralink
 - cursor 6.5 bits/s, but this is the company's number
 - there is a paper, but about single-neuron recording, not decoding ([Nat Comms](https://www.nature.com/articles/s41467-026-71443-7)). Waiting for a decoding paper
 
-**[NeuroXess](https://www.neuroxess.com) · Shanghai · 2021 · ~$168M · last round $104M (10.2026)**
+### [NeuroXess](https://www.neuroxess.com)
+
+<p class="meta">Shanghai · 2021 · ~$168M · last round $104M (10.2026)</p>
 
 **what:** basically a Chinese Precision. A flexible micro-ECoG grid sits on the cortex and does not penetrate it. 256 channels vs 1024 at Precision, but they have a fully implanted version with a battery.
 - 65 clinical cases, now a registration trial in 16 hospitals
 - Mandarin speech: 394 syllables, median 71.2% ([Science Advances](https://doi.org/10.1126/sciadv.adz9968)). By the way, Li Yuanning is a co-author there, he shows up again below
 
-**NeuCyber / Beinao · Beijing · 2023 · ~$30M from the Beijing government, no private rounds**
+### NeuCyber / Beinao
+
+<p class="meta">Beijing · 2023 · ~$30M from the Beijing government, no private rounds</p>
 
 **what:** a state project of the Beijing brain institute [CIBR](https://www.cibr.ac.cn).
 - Beinao-1 sits above the dura, 128 channels, decodes ~100 Chinese words. 40+ patients, but the numbers differ between sources
@@ -53,17 +61,23 @@ Now the companies.
 
 This is the most interesting part for me: we work with a Utah array in V1 of a blind participant ourselves.
 
-**Mindtrix · 2024 · >$74M in 2026 · last round pre-A+ (11.2026)**
+### Mindtrix
+
+<p class="meta">2024 · >$74M in 2026 · last round pre-A+ (11.2026)</p>
 
 **what:** visual cortex stimulation, 1024 channels.
 - Data so far from one sighted patient with epilepsy, an acute experiment. He saw "shapes and colors", phosphene positions matched in 95% of cases, according to the company
 - No paper, no video. The first blind patient is promised in 2027
 
-**Xinsheng Shijie · Beijing · 2026 · seed ~$15M (06.2026)**
+### Xinsheng Shijie
+
+<p class="meta">Beijing · 2026 · seed ~$15M (06.2026)</p>
 
 **what:** also a cortical visual prosthesis, still preclinical. Their co-founder is the same [Li Yuanning](https://yuanningli.github.io) from the NeuroXess paper, a former postdoc of Edward Chang.
 
-**[NanoChap](https://www.nanochap.com) · Hangzhou · 2014 · ~$149M · last round $74M (11.2026)**
+### [NanoChap](https://www.nanochap.com)
+
+<p class="meta">Hangzhou · 2014 · ~$149M · last round $74M (11.2026)</p>
 
 **what:** a retinal implant, 320 channels, already in a clinical trial.
 - a woman who had not seen for ~20 years recognizes some letters and writes the word "China" in Chinese characters
@@ -76,11 +90,15 @@ Europe for comparison:
 
 ## Non-invasive
 
-**[BrainCo](https://www.brainco.tech) · Hangzhou and Boston · 2015 · ~$370M · last round $286M (01.2026)**
+### [BrainCo](https://www.brainco.tech)
+
+<p class="meta">Hangzhou and Boston · 2015 · ~$370M · last round $286M (01.2026)</p>
 
 **what:** EEG headbands, a bionic hand on sEMG and hands for humanoids. The Hong Kong IPO was postponed.
 
-**[Gestala](https://www.gestala.com) · Chengdu and Shanghai · 2026 · $85M in six months · last round ~$63M (07.2026)**
+### [Gestala](https://www.gestala.com)
+
+<p class="meta">Chengdu and Shanghai · 2026 · $85M in six months · last round ~$63M (07.2026)</p>
 
 **what:** ultrasound without an implant plus a brain foundation model.
 - first indication: chronic pain, 30+ cases
