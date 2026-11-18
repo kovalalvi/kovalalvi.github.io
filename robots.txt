@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://kovalalvi.github.io/sitemap.xml

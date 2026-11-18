@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brain-computer interfaces in China: 12 companies, money and data</title>
+<meta name="description" content="China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and put $922M into BCI in 2026. I went through 12 companies.">
+<meta property="og:title" content="Brain-computer interfaces in China: 12 companies, money and data">
+<meta property="og:description" content="China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and put $922M into BCI in 2026. I went through 12 companies.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/neurotech-china/">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/neurotech-china/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a></nav>
+</header>
+<main>
+<article>
+<header><h1>Brain-computer interfaces in China: 12 companies, money and data</h1>
+<div class="meta">November 18, 2026 · review</div></header>
+<p>Recently Bashar Badran from the Chinese startup Gestala visited us. He used to work at Neuralink, and now he runs clinical and science there. He told us how strong neurotech in China is right now. At AAAI I also talked a lot with a colleague from a BCI lab in Beijing. Then I got sick, stayed at home and finally decided to figure out what is really going on there.</p>
+<p>First thing I found: on March 13, 2026 China approved NEO by Neuracle, the world's first implantable brain-computer interface as a product. 9 days later it got an insurance billing code, 11 days later it was on public procurement lists (<a href="https://www.technologyreview.com/2026/06/01/1138133/china-world-first-brain-chip/">MIT Tech Review</a>).</p>
+<p>Then I found out that in China a hospital can start a human study of an implant by itself. Lab tests, materials and large-animal studies are still required (<a href="https://ccj.pku.edu.cn/Article/DownLoad?id=797921449017413&amp;type=ArticleFile">example</a>), but the hospital reviews them, and since May 2026 the National Health Commission only gets a notification and can stop the study later (<a href="https://www.nhc.gov.cn/qjjys/c100015/202604/1c2cca29daef42509e8ffd9ddf9c64fd.shtml">NHC</a>). In the US, the FDA reviews all of this before the start.</p>
+<p>And money. In 2025 Chinese BCI raised $114M, in 2026 already $922M, almost the same as the US with $932M (<a href="https://newmarketpitch.com/blogs/news/brain-computer-interface-funding-trends">New Market Pitch</a>).</p>
+<p>Now the companies.</p>
+<h2 id="invasive">Invasive</h2>
+<h3 id="neuracle"><a href="https://www.neuracle.cn">Neuracle</a></h3>
+<p class="meta">Shanghai · 2011 · valuation ~$595M · last round $45M (11.2025), preparing an IPO</p>
+
+<p><strong>what:</strong> the first approved implant, NEO. For people with tetraplegia after a neck injury: close and open the hand.</p>
+<ul>
+<li>Basically 8 contacts on top of the dura, nothing goes into the cortex. No battery, it works while a coil sits on the head. An external computer decodes and inflates a glove on the hand</li>
+<li>One patient: F1 0.91 over 9 months at home (<a href="https://www.medrxiv.org/content/10.1101/2024.09.05.24313041">medRxiv</a>). My first thought was that EEG has done the same for years. I found a similar patient: ~70% accuracy after a year of training (<a href="https://doi.org/10.1016/j.artmed.2013.07.004">Rohm 2013</a>). Different metrics, but the gap is clear</li>
+<li>A kit costs $71k, 13 sold since July. No paper yet on the 32 patients from the trial</li>
+</ul>
+<h3 id="stairmed"><a href="https://www.stairmed.com/en">StairMed</a></h3>
+<p class="meta">Shanghai · 2021 · $387M · last round ~$208M (H2 2026), preparing an IPO</p>
+
+<p><strong>what:</strong> the closest to Neuralink: flexible electrodes that actually go into the cortex, 256 channels.</p>
+<ul>
+<li>42 implants, by their count already more than Neuralink</li>
+<li>cursor 6.5 bits/s, but this is the company's number</li>
+<li>there is a paper, but about single-neuron recording, not decoding (<a href="https://www.nature.com/articles/s41467-026-71443-7">Nat Comms</a>). Waiting for a decoding paper</li>
+</ul>
+<h3 id="neuroxess"><a href="https://www.neuroxess.com">NeuroXess</a></h3>
+<p class="meta">Shanghai · 2021 · ~$168M · last round $104M (10.2026)</p>
+
+<p><strong>what:</strong> basically a Chinese Precision. A flexible micro-ECoG grid sits on the cortex and does not penetrate it. 256 channels vs 1024 at Precision, but they have a fully implanted version with a battery.</p>
+<ul>
+<li>65 clinical cases, now a registration trial in 16 hospitals</li>
+<li>Mandarin speech: 394 syllables, median 71.2% (<a href="https://doi.org/10.1126/sciadv.adz9968">Science Advances</a>). By the way, Li Yuanning is a co-author there, he shows up again below</li>
+</ul>
+<h3 id="neucyber-beinao">NeuCyber / Beinao</h3>
+<p class="meta">Beijing · 2023 · ~$30M from the Beijing government, no private rounds</p>
+
+<p><strong>what:</strong> a state project of the Beijing brain institute <a href="https://www.cibr.ac.cn">CIBR</a>.</p>
+<ul>
+<li>Beinao-1 sits above the dura, 128 channels, decodes ~100 Chinese words. 40+ patients, but the numbers differ between sources</li>
+<li>Beinao-2 is intracortical, 512 channels, promised in humans by the end of 2026</li>
+</ul>
+<p><strong>New wave of intracortical startups.</strong> Lots of money, no clinical data at all:</p>
+<ul>
+<li><strong><a href="https://www.aitbci.com">AIT</a> (Active Intelligence Technologies) · Shanghai · 2026 · ~$118M · last round $69M (11.2026)</strong>. A record for an angel round. Ultra-flexible electrodes, 1024 channels</li>
+<li><strong><a href="https://www.bciflex.com">Zhiran / BCIFlex</a> · Beijing · 2022 · $93M · last round $45M (02.2026)</strong>. Ultra-thin flexible electrodes</li>
+<li><strong>Zhonghua · Wuhan · 2021 · no rounds, funded personally by the chairman of Guide Infrared</strong>. Claims 65,536 channels, "20x more than Neuralink". No paper</li>
+</ul>
+<h2 id="vision">Vision</h2>
+<p>This is the most interesting part for me: we work with a Utah array in V1 of a blind participant ourselves.</p>
+<h3 id="mindtrix">Mindtrix</h3>
+<p class="meta">2024 · >$74M in 2026 · last round pre-A+ (11.2026)</p>
+
+<p><strong>what:</strong> visual cortex stimulation, 1024 channels.</p>
+<ul>
+<li>Data so far from one sighted patient with epilepsy, an acute experiment. He saw "shapes and colors", phosphene positions matched in 95% of cases, according to the company</li>
+<li>No paper, no video. The first blind patient is promised in 2027</li>
+</ul>
+<h3 id="xinsheng-shijie">Xinsheng Shijie</h3>
+<p class="meta">Beijing · 2026 · seed ~$15M (06.2026)</p>
+
+<p><strong>what:</strong> also a cortical visual prosthesis, still preclinical. Their co-founder is the same <a href="https://yuanningli.github.io">Li Yuanning</a> from the NeuroXess paper, a former postdoc of Edward Chang.</p>
+<h3 id="nanochap"><a href="https://www.nanochap.com">NanoChap</a></h3>
+<p class="meta">Hangzhou · 2014 · ~$149M · last round $74M (11.2026)</p>
+
+<p><strong>what:</strong> a retinal implant, 320 channels, already in a clinical trial.</p>
+<ul>
+<li>a woman who had not seen for ~20 years recognizes some letters and writes the word "China" in Chinese characters</li>
+<li>a 1280-channel cortical version is still in development</li>
+</ul>
+<p>Europe for comparison:</p>
+<ul>
+<li><strong><a href="https://www.revision-implant.com/">ReVision Implant</a> · Leuven · 2020 · last round $4.5M (05.2026)</strong>. Cortical prosthesis. They plan the first clinical study in humans in our lab at the end of 2027</li>
+<li><strong><a href="https://www.phosphoenix.nl">Phosphoenix</a> · Amsterdam · last round $1.5M (09.2026)</strong>. They stimulate the LGN, not the cortex</li>
+</ul>
+<h2 id="non-invasive">Non-invasive</h2>
+<h3 id="brainco"><a href="https://www.brainco.tech">BrainCo</a></h3>
+<p class="meta">Hangzhou and Boston · 2015 · ~$370M · last round $286M (01.2026)</p>
+
+<p><strong>what:</strong> EEG headbands, a bionic hand on sEMG and hands for humanoids. The Hong Kong IPO was postponed.</p>
+<h3 id="gestala"><a href="https://www.gestala.com">Gestala</a></h3>
+<p class="meta">Chengdu and Shanghai · 2026 · $85M in six months · last round ~$63M (07.2026)</p>
+
+<p><strong>what:</strong> ultrasound without an implant plus a brain foundation model.</p>
+<ul>
+<li>first indication: chronic pain, 30+ cases</li>
+<li>the same Bashar joined them from Neuralink in April 2026, where he led clinical partnerships (<a href="https://www.gestala.com/news/15">Gestala</a>)</li>
+</ul>
+<h2 id="my-thoughts">My thoughts</h2>
+<p>Time to move to China 😅</p>
+<p>OK, seriously: China invests a lot in neurotech. There is both private and state money. The regulator makes it easier to test new technologies in humans, so you can work with a hospital directly. It may look like there are not many papers and details, but we can say the same about American companies. In my view, this is fine. It is hard to demand papers in top journals from startups.</p>
+<p>On vision: Mindtrix alone raised more than 10x what ReVision and Phosphoenix raised together in 2026. And the Europeans have no human data at all, while Mindtrix has at least one test (on a sighted patient, during a different procedure).</p>
+<p>China is quickly becoming the second neurotech center in the world, right after the US. My prediction: in 5–10 years China can take first place by the number of implanted neural devices.</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell">Telegram channel (RU)</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>© 2026 Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+</body>
+</html>
