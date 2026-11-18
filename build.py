@@ -140,6 +140,14 @@ def feed(posts):
 """
 
 
+def sitemap(posts):
+    """sitemap.xml for search engines: home, blog index, every post with its date."""
+    newest = max(p["date"] for p in posts)
+    urls = [("/", newest), ("/blog/", newest)] + [(p["url"], p["date"]) for p in posts]
+    rows = "".join(f"<url><loc>{SITE_URL}{u}</loc><lastmod>{d:%Y-%m-%d}</lastmod></url>" for u, d in urls)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{rows}</urlset>\n'
+
+
 def main():
     shutil.rmtree(OUT, ignore_errors=True)
     shutil.copytree(ROOT / "static", OUT)
@@ -154,6 +162,8 @@ def main():
     for p in posts:
         write(p["url"], page(p["title"], p["description"], p["url"], inline_figs(post_page(p)), og_type="article", image=p.get("image")))
     write("/feed.xml", feed(posts))
+    write("/sitemap.xml", sitemap(posts))
+    write("/robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
     print(f"built {len(posts)} posts → {OUT}")
 
 

@@ -1,6 +1,6 @@
 ---
 title: Brain-computer interfaces in China: 12 companies, money and data
-description: China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and put $922M into BCI in 2026. I went through 12 companies.
+description: China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and raised over $1B for BCI in the first half of 2026 alone. I went through 12 companies.
 tag: review
 image: /fig/china/map-preview.png
 ---
@@ -13,7 +13,7 @@ First thing I found: on March 13, 2026 China approved NEO by Neuracle, the world
 
 Then I found out that in China a hospital can start a human study of an implant by itself. Lab tests, materials and large-animal studies are still required ([example](https://ccj.pku.edu.cn/Article/DownLoad?id=797921449017413&type=ArticleFile)), but the hospital reviews them, and since May 2026 the National Health Commission only gets a notification and can stop the study later ([NHC](https://www.nhc.gov.cn/qjjys/c100015/202604/1c2cca29daef42509e8ffd9ddf9c64fd.shtml)). In the US, the FDA reviews all of this before the start.
 
-And money. In 2025 Chinese BCI raised $114M, in 2026 already $922M, almost the same as the US with $932M ([New Market Pitch](https://newmarketpitch.com/blogs/news/brain-computer-interface-funding-trends)).
+And money. By the Chinese database IT桔子, Chinese BCI raised ~$357M in all of 2025 and ~$1.08B in just the first half of 2026, 3x more ([36Kr](https://news.pedaily.cn/202610/570325.shtml)). The tracker New Market Pitch counts only rounds with a disclosed amount and sees less: at least $922M for China by mid-November 2026, against $932M for the US ([New Market Pitch](https://newmarketpitch.com/blogs/news/brain-computer-interface-funding-trends)). So even by the lower count China is level with the US, and by the Chinese count it is probably already ahead.
 
 Now the companies.
 
@@ -129,7 +129,8 @@ China is quickly becoming the second neurotech center in the world, right after 
 - National Health Commission, [notice on hospital-initiated clinical research](https://www.nhc.gov.cn/qjjys/c100015/202604/1c2cca29daef42509e8ffd9ddf9c64fd.shtml), 2026-04
 - Peking University, [example of the preclinical package for an implant study](https://ccj.pku.edu.cn/Article/DownLoad?id=797921449017413&type=ArticleFile)
 - Chen L. et al., [Clinical translation of BCI in China: IITs, registered trials, regulatory approval](https://arxiv.org/abs/2607.07185), arXiv, 2026-07
-- New Market Pitch, [BCI funding trends](https://newmarketpitch.com/blogs/news/brain-computer-interface-funding-trends), updated 2026-11-17
+- 36Kr / PEdaily, [IT桔子 data: 64 deals and ¥7.25B in H1 2026, ¥2.40B in all of 2025](https://news.pedaily.cn/202610/570325.shtml), 2026-10-15
+- New Market Pitch, [BCI funding trends](https://newmarketpitch.com/blogs/news/brain-computer-interface-funding-trends) (disclosed rounds only, January 1 – November 13), updated 2026-11-17
 
 **Neuracle**
 - Preprint on the home-use patient, [medRxiv](https://www.medrxiv.org/content/10.1101/2024.09.05.24313041)
