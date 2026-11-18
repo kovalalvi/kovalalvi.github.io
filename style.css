@@ -93,6 +93,8 @@ th { font-weight: 600; }
 .pubs .ptitle { color: var(--text); font-weight: 600; }
 .pubs .ptitle:hover { color: var(--accent); }
 .pubs .venue { font-style: italic; color: var(--muted); }
+.pubs .paper { display: grid; grid-template-columns: 10.5rem 1fr; gap: 1.25rem; align-items: start; margin-bottom: 1.75rem; }
+.pubs .thumb { width: 100%; border: 1px solid var(--rule); border-radius: 6px; }
 
 /* post lists */
 ul.posts { list-style: none; padding: 0; }
@@ -141,6 +143,8 @@ article h2, article h3 { scroll-margin-top: 1.5rem; }
   .intro .lead, .title-block .dek { font-size: 1.15rem; }
   header.site { padding: 1.25rem 0 2rem; }
   .intro .links { column-gap: 0.75rem; }  /* six links fit one line at 375px */
+  .pubs .paper { grid-template-columns: 1fr; gap: 0.6rem; }
+  .pubs .thumb { width: 13rem; }
   .byline { grid-template-columns: repeat(2, auto); justify-content: start; gap: 0.75rem 2.5rem; }
   ul.posts li { flex-direction: column; gap: 0; }
   ul.posts .date { flex: none; padding: 0; }
