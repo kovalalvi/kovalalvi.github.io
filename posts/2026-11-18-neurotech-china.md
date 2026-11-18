@@ -1,7 +1,7 @@
 ---
 title: Brain-computer interfaces in China: 12 companies, money and data
 description: China approved the first implantable BCI as a product, lets hospitals start implant studies themselves, and put $922M into BCI in 2026. I went through 12 companies.
-tag: review
+tag: industry
 telegram: https://t.me/neural_cell/354
 ---
 

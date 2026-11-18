@@ -3,6 +3,7 @@
 # dependencies = ["markdown==3.7"]
 # ///
 """Build the site into _site/.  Run: uv run build.py  (preview: python3 -m http.server -d _site)"""
+import hashlib
 import html
 import re
 import shutil
@@ -17,6 +18,8 @@ OUT = ROOT / "_site"
 SITE_URL = "https://kovalalvi.github.io"
 TELEGRAM = "https://t.me/neural_cell"
 BASE = (ROOT / "templates/base.html").read_text()
+# changes with the stylesheet, so browsers don't keep an old cached style.css
+CSS_VERSION = hashlib.sha1((ROOT / "static/style.css").read_bytes()).hexdigest()[:8]
 
 
 def page(title, description, url_path, content, og_type="website", image=None):
@@ -30,6 +33,7 @@ def page(title, description, url_path, content, og_type="website", image=None):
         "url": SITE_URL + url_path,
         "og_type": og_type,
         "card": card,
+        "css_version": CSS_VERSION,
     }.items():
         out = out.replace("{{" + key + "}}", value)
     return out.replace("{{content}}", content)  # content last: post text may contain "{{"
@@ -78,15 +82,31 @@ def read_post(path):
     }
 
 
-def post_list(posts, with_description=False):
+def post_list(posts):
+    """Compact list for the home page."""
     rows = "".join(
         f'<li><span class="date">{p["date"]:%b %d, %Y}</span>'
-        f'<span><a href="{p["url"]}">{html.escape(p["title"])}</a> <span class="tag">· {p["tag"]}</span>'
-        + (f'<span class="desc">{html.escape(p["description"])}</span>' if with_description else "")
-        + "</span></li>"
+        f'<span><a href="{p["url"]}">{html.escape(p["title"])}</a> <span class="type">{p["tag"]}</span></span></li>'
         for p in posts
     )
     return f'<ul class="posts">{rows}</ul>'
+
+
+def blog_index(posts):
+    """Posts grouped by year, with type chips that filter the list (blog.js)."""
+    types = sorted({p["tag"] for p in posts}, key=lambda t: -sum(p["tag"] == t for p in posts))
+    chips = "".join(f'<button class="chip" data-type="{t}">{t}</button>' for t in types)
+    groups = ""
+    for year in sorted({p["date"].year for p in posts}, reverse=True):
+        rows = "".join(
+            f'<li data-type="{p["tag"]}"><span class="date">{p["date"]:%b %d}</span>'
+            f'<span><a href="{p["url"]}">{html.escape(p["title"])}</a> <span class="type">{p["tag"]}</span>'
+            f'<span class="desc">{html.escape(p["description"])}</span></span></li>'
+            for p in posts if p["date"].year == year
+        )
+        groups += f'<section class="year"><h2>{year}</h2><ul class="posts">{rows}</ul></section>'
+    return (f'<h1>Blog</h1>\n<div class="filters"><button class="chip active" data-type="all">all</button>{chips}</div>\n'
+            f'{groups}\n<script src="/blog.js" defer></script>')
 
 
 def post_page(p):
@@ -131,7 +151,7 @@ def main():
     home = inline_figs((ROOT / "templates/home.html").read_text().replace("{{posts}}", post_list(posts[:5])))
     write("/", page("Aleksandr Kovalev", "AI models for intracortical brain-computer interfaces.", "/", home))
     write("/blog/", page("Blog · Aleksandr Kovalev", "Notes on brain-computer interfaces and AI.", "/blog/",
-                         f"<h1>Blog</h1>\n{post_list(posts, with_description=True)}"))
+                         blog_index(posts)))
     for p in posts:
         write(p["url"], page(p["title"], p["description"], p["url"], post_page(p), og_type="article", image=p.get("image")))
     write("/feed.xml", feed(posts))
