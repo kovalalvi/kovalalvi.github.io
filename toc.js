@@ -1,7 +1,8 @@
-// Heading rail for posts: a column of dashes left of the text, one per h2/h3.
+// Heading rail for posts: a column of dashes left of the text, one per h2/h3 (h2 only if front matter has toc: h2).
 // Hover shows the titles, the current section is highlighted. Hidden on narrow screens by CSS.
 (() => {
-  const headings = [...document.querySelectorAll("article h2[id], article h3[id]")];
+  const onlyH2 = document.querySelector("article[data-toc=h2]");
+  const headings = [...document.querySelectorAll(onlyH2 ? "article h2[id]" : "article h2[id], article h3[id]")];
   if (headings.length < 3) return;
 
   const rail = document.createElement("nav");
