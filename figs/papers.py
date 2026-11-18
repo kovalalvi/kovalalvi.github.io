@@ -12,7 +12,7 @@ X0, X1 = 14, 226  # time axis
 
 STYLE = """<style>
   .g .faint { fill: var(--rule, #e4e1da); }
-  .g .l-ink { stroke: var(--text, #1c1b19); } .g .l-mid { stroke: var(--fig-mid, #9a968e); } .g .l-acc { stroke: var(--accent, #b4441f); }
+  .g .l-ink { stroke: var(--text, #1c1b19); } .g .l-mid { stroke: var(--fig-mid, #9a968e); } .g .l-acc { stroke: var(--accent, #0e7470); }
   .g line, .g polyline { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
   .g text { font-family: "Inter Tight", -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 9px; fill: var(--fig-mid, #9a968e); letter-spacing: .02em; }
 </style>"""
