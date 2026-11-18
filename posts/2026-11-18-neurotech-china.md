@@ -5,6 +5,7 @@ tag: review
 image: /fig/china/map-preview.png
 ---
 
+<img class="svg wide" src="/fig/china/map.svg" alt="Map of China with the twelve companies and how much each raised">
 
 Recently Bashar Badran from the Chinese startup Gestala visited us. He used to work at Neuralink, and now he runs clinical and science there. He told us how strong neurotech in China is right now. At AAAI I also talked a lot with a colleague from a BCI lab in Beijing. Then I got sick, stayed at home and finally decided to figure out what is really going on there.
 
@@ -13,8 +14,6 @@ First thing I found: on March 13, 2026 China approved NEO by Neuracle, the world
 Then I found out that in China a hospital can start a human study of an implant by itself. Lab tests, materials and large-animal studies are still required ([example](https://ccj.pku.edu.cn/Article/DownLoad?id=797921449017413&type=ArticleFile)), but the hospital reviews them, and since May 2026 the National Health Commission only gets a notification and can stop the study later ([NHC](https://www.nhc.gov.cn/qjjys/c100015/202604/1c2cca29daef42509e8ffd9ddf9c64fd.shtml)). In the US, the FDA reviews all of this before the start.
 
 And money. In 2025 Chinese BCI raised $114M, in 2026 already $922M, almost the same as the US with $932M ([New Market Pitch](https://newmarketpitch.com/blogs/news/brain-computer-interface-funding-trends)).
-
-<img class="svg wide" src="/fig/china/map.svg" alt="Map of China with the twelve companies and how much each raised">
 
 Now the companies.
 
