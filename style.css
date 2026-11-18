@@ -72,6 +72,10 @@ pre code { background: none; padding: 0; }
 img, video, svg { max-width: 100%; height: auto; }
 figure { margin: 2.5rem 0; }
 figcaption { font: 0.85rem/1.5 var(--sans); color: var(--muted); margin-top: 0.6rem; }
+article img { display: block; margin: 1.5rem auto; border-radius: 4px; }
+/* several images side by side: <div class="gallery"><img ...><img ...></div> */
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.5rem; margin: 1.5rem 0; }
+.gallery img { margin: 0; width: 100%; height: 100%; object-fit: cover; }
 /* figure or image wider than the text column: <figure class="wide"> or ![](x.svg){: .wide} */
 .wide { width: min(64rem, 100vw - 2rem); max-width: none; margin-left: 50%; transform: translateX(-50%); }
 table { border-collapse: collapse; width: 100%; font: 0.9rem/1.5 var(--sans); margin: 1.5rem 0; display: block; overflow-x: auto; font-variant-numeric: tabular-nums; }

@@ -9,7 +9,8 @@
 <meta property="og:description" content="Precision recorded 70 patients with 1024-electrode surface grids and built an atlas of cortex, brainstem and spinal cord. What they found, and what I would train on this data.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kovalalvi.github.io/blog/precision-atlas/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://kovalalvi.github.io/img/precision-atlas/fig1.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://kovalalvi.github.io/blog/precision-atlas/">
 <link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +35,7 @@
   <div><span>Type</span>review</div>
 </div>
 </header>
+<p><img alt="Figure 1 of the preprint: array placement, tasks, data processing and the brain atlas" src="/img/precision-atlas/fig1.jpg" /></p>
 <p>Precision Neuroscience posted a big preprint: they recorded 70 patients with their flexible 1024-electrode grids (micro-ECoG) and built an atlas from it. Cortex, brainstem, and even the spinal cord.</p>
 <p>The idea is interesting. A whole-brain interface is usually imagined as one huge device in one head. They come at it from the other side: record many people piece by piece, bring everything into shared anatomical coordinates, and get something functionally similar.</p>
 <h2 id="how-they-recorded">How they recorded</h2>
@@ -45,7 +47,7 @@
 <h2 id="what-id-try-on-this-data">What I'd try on this data</h2>
 <p>The data isn't released yet (access will be decided after peer review), but here's what I'd test. The interesting question is whether one model generalizes to a new patient: hand gestures were recorded in 21 patients, so train on 20 and test on the 21st. In speech BCI, Fogg et al. 2026 did something similar: a shared model with a separate input layer per person cut offline WER by 51% on average versus single-person models. I'd pretrain that shared model as an MAE on all 180 hours (87k electrodes; the authors mention foundation models themselves), then fine-tune on the small tasks (18 to 200 examples). For electrode position I'd add a relative embedding from functional connectivity, not only the template-brain coordinate, which has up to 2 mm error.</p>
 <p>Paper: Ho, Barth, Dister et al. <a href="https://doi.org/10.64898/2026.09.24.754261">Toward a whole-brain interface enabled by high-resolution surface electrophysiology</a>. bioRxiv, 2026.</p>
-<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell">Telegram channel (RU)</a></div>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/345">Discuss on Telegram (RU)</a></div>
 </article>
 <script src="/toc.js" defer></script>
 </main>

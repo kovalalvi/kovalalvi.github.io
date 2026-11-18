@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross-subject speech BCI: what is inside the architecture</title>
+<meta name="description" content="Boccato, Olak and Ferrante (J Neural Eng 2026) jointly train a phoneme decoder on two Utah speech datasets and adapt to new people with almost one linear layer. The three components, the results, and what I would take for NeuroMAE.">
+<meta property="og:title" content="Cross-subject speech BCI: what is inside the architecture">
+<meta property="og:description" content="Boccato, Olak and Ferrante (J Neural Eng 2026) jointly train a phoneme decoder on two Utah speech datasets and adapt to new people with almost one linear layer. The three components, the results, and what I would take for NeuroMAE.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/cross-subject-speech-bci/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/cross-subject-speech-bci/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a></nav>
+</header>
+<main>
+<article>
+<header class="title-block">
+<h1>Cross-subject speech BCI: what is inside the architecture</h1>
+<p class="dek">Boccato, Olak and Ferrante (J Neural Eng 2026) jointly train a phoneme decoder on two Utah speech datasets and adapt to new people with almost one linear layer. The three components, the results, and what I would take for NeuroMAE.</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>UMH, Spain</div>
+  <div><span>Published</span>Sep 11, 2026</div>
+  <div><span>Type</span>review</div>
+</div>
+</header>
+<p>A paper in J Neural Eng (Boccato, Olak, Ferrante, 2026): jointly train a phoneme decoder on two Utah array speech datasets (Willett T12 + Card T15) and adapt to new people with almost a single linear layer.</p>
+<p><strong>The problem.</strong> Almost all brain-to-text systems are trained from scratch on one participant. A new patient means hours of calibration. Cross-subject has barely been touched, although day-to-day drift within a person is of the same order as the difference between people.</p>
+<h2 id="three-components">Three components</h2>
+<ol>
+<li>
+<p><strong>A day/subject affine layer before everything.</strong> For each <code>(subject, day)</code>: <code>x̃ = W_{d,s} x + b</code>. Channels are padded to a common 512-d (spike counts + spike-band power, 20 ms bins). This is not a per-channel gain but a linear realignment into a shared space. In the analysis the diag_ratio is ~0.7–0.9 (mostly "own" channels), but there is off-diagonal mixing. Swapping days: the own transform is better, a foreign one still doesn't kill PER, so the manifold is stable up to an affine map.</p>
+</li>
+<li>
+<p><strong>Hierarchical GRU + feedback, not a transformer.</strong> Three blocks: early = 2× biGRU → phoneme logits → projected back → <strong>added</strong> to the hidden state; middle the same; final = 1× GRU. Hidden size <strong>2048</strong> (the baselines use 512/1024). Loss: <code>CTC_final + λ (CTC_early + CTC_middle)</code>, λ = 0.3. The point: plain CTC treats frames as independent; early phoneme hypotheses are fed back into the next GRUs to partly bring back a sequential bias without an autoregressive transformer (in the Brain2Text challenge a small GRU+CTC still beat transformers and SSMs).</p>
+</li>
+<li>
+<p><strong>WFST + LM outside.</strong> Phoneme → lexicon → 5-gram → rescoring with OPT-125M. Most of the WER errors are here, not in neural → phoneme.</p>
+</li>
+</ol>
+<h2 id="where-they-tested">Where they tested</h2>
+<p>Joint training on Willett + Card. Hierarchical: Willett PER <strong>16.1%</strong> vs baseline <strong>19.7%</strong>; Card <strong>9.1%</strong> vs <strong>10.2%</strong>. Plain CTC is already almost there; the hierarchy gives a mild gain, significant over 5 seeds. On Kunz (inner speech, T12–T17): freeze the backbone, train only <code>W, b</code> on 100–1000 trials → PER drops from chance; full fine-tuning gives another −20–40% relative. From scratch on a tiny vocabulary (7 words) is sometimes better, and they say so honestly. Joint training on 6 subjects is stronger than adapting after the fact.</p>
+<h2 id="what-could-be-improved-and-what-id-take-for-neuromae">What could be improved, and what I'd take for NeuroMAE</h2>
+<ol>
+<li>
+<p><strong>An "affine only" ablation.</strong> The main result mixes joint data + H = 2048 + hierarchy. For us the first piece matters. We need a table: plain GRU + day affine vs + hierarchy vs + bigger H. If the affine layer carries 80% of the effect, we copy only that.</p>
+</li>
+<li>
+<p><strong>Affine vs a proper alignment.</strong> They use a linear <code>W</code>. For V1/Utah I would right away compare it with Procrustes / CCA / a soft day embedding (MoE over day id) under the same frozen-backbone protocol. Hypothesis: session drift in MUA is more often an almost orthogonal rotation + scale, not a full <code>W ∈ R^{512×512}</code>.</p>
+</li>
+<li>
+<p><strong>The same adaptation protocol on NeuroMAE.</strong> Pretrain the MAE on subject A (or a pool), on subject B fit only <code>W_B</code> / the positional encoding, probe the frozen latents. Null: permute the day labels of <code>W_{d,s}</code>; if the metric survives, the alignment overfits. This is exactly their bet "cross-subject = a linear re-centering", just without CTC and a speech LM.</p>
+</li>
+</ol>
+<p>It's not V1 and not imagery: it's speech motor cortex + phoneme CTC. I would steal the align + freeze recipe; a hierarchical GRU is not needed for resting MUA.</p>
+<p>Paper: Boccato, Olak, Ferrante. <a href="https://doi.org/10.1088/1741-2552/ae8576">Cross-subject decoding of human neural data for speech brain computer interfaces</a>. J Neural Eng 23, 046018 (2026).</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell">Telegram channel (RU)</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+</body>
+</html>

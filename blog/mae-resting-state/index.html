@@ -9,7 +9,8 @@
 <meta property="og:description" content="We pretrain an MAE on 14.6 hours of spontaneous activity from V1 of a blind patient with a Utah array, and decode from the response to stimulation whether the person sees a phosphene. Our AAAI-26 workshop paper.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kovalalvi.github.io/blog/mae-resting-state/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://kovalalvi.github.io/img/mae-resting-state/paper.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://kovalalvi.github.io/blog/mae-resting-state/">
 <link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +35,7 @@
   <div><span>Type</span>own work</div>
 </div>
 </header>
+<p><img alt="The first page of the paper" src="/img/mae-resting-state/paper.jpg" /></p>
 <p>tl;dr: we pretrain an MAE on 14.6 hours of spontaneous activity from V1 of a blind patient with a Utah array, and from the neural response to stimulation we decode whether the person sees a phosphene or not. Real patient data.</p>
 <p>I finally got around to writing a short review of my AAAI-26 paper. I already shared the poster, and now it has made it to arXiv too.</p>
 <p>So, we work with Utah array signals from V1 of blind people: we can both stimulate and record. It would be great not to ask the person every time whether they see something, but to understand it directly from the neural response to stimulation. Plus we have accumulated a lot of spontaneous activity: 252 sessions, 14.6 hours of recordings from 96 channels. So the question is: can we pretrain a model on this data so that it helps tell whether the person sees or not.</p>
@@ -45,7 +47,7 @@
 <h2 id="next-step">Next step</h2>
 <p>Turn this into a full paper: train on several people and run proper ablations. Hopefully it works out, and then it goes somewhere like the Journal of Neural Engineering.</p>
 <p>Paper: Kovalev<em>, Lozano</em>, Grani* et al. <a href="https://arxiv.org/abs/2607.22615">Masked Autoencoders Learn Perception-Relevant Representations from Resting State Neural Data</a>. NeuroAI Workshop @ AAAI 2026.</p>
-<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell">Telegram channel (RU)</a></div>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/341">Discuss on Telegram (RU)</a></div>
 </article>
 <script src="/toc.js" defer></script>
 </main>

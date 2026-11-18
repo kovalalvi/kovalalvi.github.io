@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3rd place at LibriBrain, NeurIPS 2025</title>
+<meta name="description" content="Speech detection from MEG, 91% F1-macro, 3rd place. What surprised us, what worked (normalization, conv + transformer, weight averaging) and what didn&#x27;t (augmentations, MAE pretraining, synthetic data).">
+<meta property="og:title" content="3rd place at LibriBrain, NeurIPS 2025">
+<meta property="og:description" content="Speech detection from MEG, 91% F1-macro, 3rd place. What surprised us, what worked (normalization, conv + transformer, weight averaging) and what didn&#x27;t (augmentations, MAE pretraining, synthetic data).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/libribrain/">
+<meta property="og:image" content="https://kovalalvi.github.io/img/libribrain/architecture.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/libribrain/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a></nav>
+</header>
+<main>
+<article>
+<header class="title-block">
+<h1>3rd place at LibriBrain, NeurIPS 2025</h1>
+<p class="dek">Speech detection from MEG, 91% F1-macro, 3rd place. What surprised us, what worked (normalization, conv + transformer, weight averaging) and what didn&#x27;t (augmentations, MAE pretraining, synthetic data).</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>UMH, Spain</div>
+  <div><span>Published</span>Dec 09, 2025</div>
+  <div><span>Type</span>own work</div>
+</div>
+</header>
+<div class="gallery"><img src="/img/libribrain/architecture.jpg" alt="Our architecture: conv encoder, transformer with RoPE, conv decoder"><img src="/img/libribrain/award.jpg" alt="The award ceremony for the speech detection track"></div>
+
+<p>A couple of days ago the organizers announced the results of the competition. We took third place in the speech detection track with 91% F1-macro and won $800 🥳</p>
+<p>Team (alvi team): Aleksandr Kovalev, Alexey Timchenko, Petr Chizhov, Vlad Lomtev.
+<a href="https://github.com/kovalalvi/alvi-libribrain-2025">Our GitHub</a> · <a href="https://neural-processing-lab.github.io/2025-libribrain-competition/leaderboard/speech_detection_standard/">the competition</a></p>
+<p>Today I'll tell you what surprised us, what worked and what didn't. First, a quick reminder of the task. A person sits and listens to an audiobook about Sherlock Holmes, and their brain activity is recorded with MEG at the same time. From this activity you need to predict whether the person hears speech or silence at every moment.</p>
+<h2 id="data">Data</h2>
+<p>The main insight: we spent a couple of weeks on the right normalization. Always look at the distributions in train/val/test to understand what you are dealing with. We used a global robust z-score (median + MAD instead of mean + std). Important: compute the statistics only on train and apply them everywhere. The organizers' default computed them separately on each split, and it worked much worse.</p>
+<p>Per-session normalization is a separate story. It gave the best result on val, but on the holdout we didn't know which sessions were there (the organizers concatenated several), so in the end we chose global normalization.</p>
+<h2 id="architecture">Architecture</h2>
+<p>For neural data, what works for audio still works great. Convolutions + transformer beat both a pure transformer and pure convolutions. The architecture is in the picture.</p>
+<p>A few things gave a boost. (1) A norm layer with a learnable scale for each channel (+1.5%). Here we did a z-score inside the window for each electrode. (2) A depth-wise conv as the first layer (first convolutions separately for each channel, then mixing). (3) Weight averaging: we averaged the model weights from the last 3 checkpoints. We tuned the number on val. We didn't expect it to work, but it really gave +1% on test.</p>
+<h2 id="what-didnt-work">What didn't work</h2>
+<p>Augmentations gave nothing for the final model; we tried masking and noise. MAE pretraining didn't work either, but we trained on small windows (256). It seems we need to try larger ones; I believe it should work. At the end we tried to expand the dataset with generation, and even trained a conditional DiT for it. No gain.</p>
+<p>p.s. First place had 91.6%, so we were close.</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/303">Discuss on Telegram (RU)</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressions from AAAI-26</title>
+<meta name="description" content="My first AI conference, in Singapore. Posters beat talks, four motor decoding labs in Beijing alone, and the AI for Neuro workshop: Tolias and Schrimpf on scaling models of the brain.">
+<meta property="og:title" content="Impressions from AAAI-26">
+<meta property="og:description" content="My first AI conference, in Singapore. Posters beat talks, four motor decoding labs in Beijing alone, and the AI for Neuro workshop: Tolias and Schrimpf on scaling models of the brain.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/aaai-26/">
+<meta property="og:image" content="https://kovalalvi.github.io/img/aaai-26/poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/aaai-26/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a></nav>
+</header>
+<main>
+<article>
+<header class="title-block">
+<h1>Impressions from AAAI-26</h1>
+<p class="dek">My first AI conference, in Singapore. Posters beat talks, four motor decoding labs in Beijing alone, and the AI for Neuro workshop: Tolias and Schrimpf on scaling models of the brain.</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>UMH, Spain</div>
+  <div><span>Published</span>Feb 07, 2026</div>
+  <div><span>Type</span>story</div>
+</div>
+</header>
+<div class="gallery"><img src="/img/aaai-26/poster.jpg" alt="Me at our poster"><img src="/img/aaai-26/workshop.jpg" alt="The AI for Neuro workshop panel"><img src="/img/aaai-26/singapore.jpg" alt="Singapore at night"></div>
+
+<p>I went to my first AI conference. I presented our work on visual implants at the AI for Neuro workshop, talked to a lot of people and listened to talks. Here is how it went.</p>
+<p>After a year in Elche (a small town in the south of Spain), Singapore is impressive. Everything shines, everything is big. But around the corner from the skyscrapers there are Hawker Centers and Chinatown: dirty, noisy, tasty. The food is great, and the weather is a constant 30 degrees.</p>
+<h2 id="the-conference">The conference</h2>
+<p>Almost 5000 accepted papers. Huge hangars with posters, impossible to see everything. Honestly, the technical sessions and invited talks didn't really work for me. Some were too general, and at the technical sessions many speakers just read from a sheet. It is much more useful to walk up to a poster and talk to the author directly. There you can ask real questions and discuss the work. I also unexpectedly met a lot of people from Russia. They work on many things: RL, pipelines for agents, NAS, weather prediction and of course generative AI.</p>
+<p>Another interesting thing: I got talking with Chinese researchers who do motor decoding in monkeys. It turned out that in Beijing alone there are now 4 labs doing this and competing with each other. So there will be many more BCI papers from China in the coming years.</p>
+<h2 id="the-ai-for-neuro-workshop">The AI for Neuro workshop</h2>
+<p>The main event for me. It was organized by Reza Abbasi-Asl and his team, and organized very well. Of the speakers, Andreas Tolias (Stanford) and Martin Schrimpf (EPFL) hooked me the most. Both said the same thing: stop playing with small models, it's time to scale.</p>
+<p>A line from Tolias that stuck with me:
+"We don't have a choice. We should stop doing toy experiments. Train big models."</p>
+<p>He showed his foundation model of the visual cortex, trained on data from ~135,000 neurons in 14 mice. When transferred to a new animal it needs 2–3 times less data than training from scratch. So you can really run experiments in silico instead of collecting data from scratch every time. Daria Kleeva's channel has a <a href="https://t.me/skigeon/205">detailed breakdown</a>.</p>
+<p>Schrimpf showed TopoLM, a transformer where units have a 2D position, like neurons in the cortex. During training the model organizes itself into clusters that resemble the brain's language areas. I liked it because the idea is simple: add a spatial loss and get a brain-like organization. His lab also has a paper on scaling laws for brain-aligned vision models, with essentially the same message: scale works.</p>
+<h2 id="my-poster">My poster</h2>
+<p>I presented "Masked Autoencoders Learn Perception-Relevant Representations from Resting State Neural Data" at the workshop poster session. In short: we take resting-state data (the brain just "hums", no stimulation), pretrain a model on it, and after that it better predicts what a person perceives when the visual implant stimulates.</p>
+<h2 id="plans">Plans</h2>
+<p>While we prepare for the next patient to be implanted with electrodes, we want to collect as much data as possible, including from monkeys, and finally scale the models properly. The main pain: data drift between sessions, and a model from one patient is very hard to transfer to another.</p>
+<div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/327">Discuss on Telegram (RU)</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+</body>
+</html>
