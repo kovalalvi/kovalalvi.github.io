@@ -2,7 +2,6 @@
 title: The most tasty neuro papers of 2025
 description: My personal, completely subjective list of the best neural decoding papers of 2025: invasive and noninvasive foundation models, neuro tools, and one paper from our lab.
 tag: digest
-telegram: https://t.me/neural_cell/333
 ---
 
 My personal, completely subjective list of the best neural decoding papers of 2025. Trend of the year: throw in more data and pray it gets better. But the main question is still how to combine data across animals, brain areas and electrode types in one model.

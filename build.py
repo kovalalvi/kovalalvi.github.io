@@ -16,7 +16,6 @@ import markdown
 ROOT = Path(__file__).parent
 OUT = ROOT / "_site"
 SITE_URL = "https://kovalalvi.github.io"
-TELEGRAM = "https://t.me/neural_cell"
 BASE = (ROOT / "templates/base.html").read_text()
 # changes with the stylesheet, so browsers don't keep an old cached style.css
 CSS_VERSION = hashlib.sha1((ROOT / "static/style.css").read_bytes()).hexdigest()[:8]
@@ -111,7 +110,6 @@ def blog_index(posts):
 
 
 def post_page(p):
-    discuss = f'<a href="{p["telegram"]}">Discuss on Telegram (RU)</a>' if "telegram" in p else f'<a href="{TELEGRAM}">Telegram channel (RU)</a>'
     return f"""<article>
 <header class="title-block">
 <h1>{html.escape(p["title"])}</h1>
@@ -124,7 +122,7 @@ def post_page(p):
 </div>
 </header>
 {p["html"]}
-<div class="post-footer"><a href="/blog/">← All posts</a>{discuss}</div>
+<div class="post-footer"><a href="/blog/">← All posts</a></div>
 </article>
 <script src="/toc.js" defer></script>"""
 

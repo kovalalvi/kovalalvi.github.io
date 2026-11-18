@@ -4,7 +4,6 @@ description: Our preprint FingerFlex: a simple U-Net-like encoder-decoder on wav
 tag: my work
 affiliation: ALVI Labs
 image: /img/fingerflex/demo-thumb.jpg
-telegram: https://t.me/neural_cell/125
 ---
 
 We are happy to share our preprint FingerFlex. We propose a new state-of-the-art model for predicting finger movements from brain activity (ECoG).

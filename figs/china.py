@@ -232,11 +232,15 @@ def decode(topo):
             out.extend(a if not out else a[1:])
         return out
 
-    shapes = {}
+    shapes, used = {}, {}
     for g in topo["objects"]["countries"]["geometries"]:
         polys = [g["arcs"]] if g["type"] == "Polygon" else g.get("arcs", []) if g["type"] == "MultiPolygon" else []
         shapes[g.get("id")] = [ring(r) for poly in polys for r in poly]
-    return shapes
+        for poly in polys:
+            for r in poly:
+                for i in r:
+                    used.setdefault(i if i >= 0 else ~i, set()).add(g.get("id"))
+    return shapes, arcs, used
 
 
 def china_map():
@@ -245,21 +249,41 @@ def china_map():
     my = lambda lat: math.log(math.tan(math.pi / 4 + math.radians(lat) / 2))
     proj = lambda lon, lat: (W * 0.47 + (lon - lon0) * k, H * 0.52 - (my(lat) - my(lat0)) * k * 180 / math.pi)
     b = f'<defs><clipPath id="cn-clip"><rect width="{W}" height="{H}"/></clipPath></defs><g clip-path="url(#cn-clip)">'
-    shapes = decode(world())
+    shapes, arcs, used = decode(world())
+
+    def screen(lonlat_pts):
+        pts, last = [], None
+        for lon, lat in lonlat_pts:
+            px, py = proj(lon, lat)
+            q = (round(min(max(px, -10), W + 10)), round(min(max(py, -10), H + 10)))  # clamp: off-canvas coast collapses onto the frame
+            if last is None or abs(q[0] - last[0]) + abs(q[1] - last[1]) >= 3:
+                pts.append(q); last = q
+        return pts
+
+    in_view = lambda r: any(55 < lon < 155 and 0 < lat < 62 for lon, lat in r)
     for cid, rings in shapes.items():
         for r in rings:
-            if not any(55 < lon < 155 and 0 < lat < 62 for lon, lat in r):
+            if not in_view(r):
                 continue
-            pts, last = [], None
-            for lon, lat in r:
-                px, py = proj(lon, lat)
-                p = (round(min(max(px, -10), W + 10)), round(min(max(py, -10), H + 10)))  # clamp: off-canvas coast collapses onto the frame
-                if last is None or abs(p[0] - last[0]) + abs(p[1] - last[1]) >= 3:
-                    pts.append(p); last = p
-            xs_, ys_ = [p[0] for p in pts], [p[1] for p in pts]
-            if len(pts) > 3 and max(xs_) - min(xs_) + max(ys_) - min(ys_) > 8:
-                b += path(pts, "rulef" if cid == "156" else "softf", 0.6, True,
-                          ' stroke="var(--fig-mid, #9a968e)"' if cid == "156" else ' stroke="var(--rule, #e4e1da)"')
+            pts = screen(r)
+            xs_, ys_ = [q[0] for q in pts], [q[1] for q in pts]
+            if len(pts) > 3 and max(xs_) - min(xs_) + max(ys_) - min(ys_) > 8 and any(0 <= q[0] <= W and 0 <= q[1] <= H for q in pts):
+                b += path(pts, "rulef" if cid == "156" else "softf", 0, True)
+    # borders, as on the international Google Maps: de facto lines, disputed China-India border dashed
+    CN, IN = "156", "356"
+    for i, users in used.items():
+        if not in_view(arcs[i]):
+            continue
+        pts = screen(arcs[i])
+        on_canvas = [q for q in pts if 0 <= q[0] <= W and 0 <= q[1] <= H]
+        if len(pts) < 2 or not on_canvas:
+            continue
+        if CN in users and IN in users:
+            b += path(pts, "mid", 0.9, extra=' stroke-dasharray="4 3"')
+        elif CN in users:
+            b += path(pts, "mid", 0.7)
+        else:
+            b += path(pts, "rule", 0.6)
     b += "</g>"
 
     # one bubble per city: area = total raised by the companies there; every company listed in the labels
@@ -279,7 +303,10 @@ def china_map():
 
     def block(city, lx, ly, anchor="start"):
         c = cities[city]; x, y = proj(*c["lonlat"])
-        out = text(lx, ly, city, 17, "serif", anchor)
+        total = ""
+        if len(c["rows"]) > 1:
+            total = f'  <tspan class="strong" font-style="normal" font-size="14" font-family="Inter Tight, -apple-system, Arial, sans-serif">${c["sum"]}M{"+" if not all(m for _, m in c["rows"]) else ""}</tspan>'
+        out = text(lx, ly, city + total, 17, "serif", anchor)
         tx = lx - 6 if anchor == "start" else lx + 6
         out += path([(x, y), (tx, ly - 5)], "mid", 0.7)
         for i, (name, m) in enumerate(sorted(c["rows"], key=lambda r: -(r[1] or 0))):
@@ -290,7 +317,7 @@ def china_map():
     b += block("Shanghai", 830, 270)
     b += block("Suzhou", 830, 383)
     b += block("Hangzhou", 830, 440)
-    b += block("Chengdu", 330, 480, "end")
+    b += block("Chengdu", 515, 350, "end")
     b += block("Wuhan", 610, 560, "end")
     b += text(40, 78, "$1.5B", 54, "serif")
     b += text(42, 104, "raised in total by the companies in this post", 15)

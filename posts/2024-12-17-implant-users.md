@@ -3,7 +3,6 @@ title: People with visual implants barely use them in real life
 description: Interviews with 6 developers and 6 users of Argus II and Orion. Developers overrate the devices; users say they are inconvenient and almost useless day to day. What users actually want.
 tag: review
 image: /img/implant-users/argus-orion.jpg
-telegram: https://t.me/neural_cell/215
 ---
 
 ![Argus II: the electrode array, glasses with a camera and the video processing unit](/img/implant-users/argus-orion.jpg)

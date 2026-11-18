@@ -3,7 +3,6 @@ title: Transformers for brain decoding: POYO, NDT2 and MtM
 description: Three foundation models for spikes: how they train across sessions and animals, what they use as a token, and how they pretrain. Plus what I would try next.
 tag: review
 image: /img/transformers-brain-decoding/poyo.jpg
-telegram: https://t.me/neural_cell/171
 ---
 
 I want to talk about the models people now use to decode brain signals (spikes, LFP). Let's look at how they are trained on data from different sessions and animals, which pretraining approaches they use, and which architectures are in use. I picked three interesting papers, briefly about each.
