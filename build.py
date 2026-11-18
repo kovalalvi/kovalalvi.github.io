@@ -18,13 +18,17 @@ TELEGRAM = "https://t.me/neural_cell"
 BASE = (ROOT / "templates/base.html").read_text()
 
 
-def page(title, description, url_path, content, og_type="website"):
+def page(title, description, url_path, content, og_type="website", image=None):
+    """image: site path like /img/x.png; becomes og:image and a large Twitter/X card."""
+    card = (f'<meta property="og:image" content="{SITE_URL}{image}">\n<meta name="twitter:card" content="summary_large_image">'
+            if image else '<meta name="twitter:card" content="summary">')
     out = BASE
     for key, value in {
         "title": html.escape(title),
         "description": html.escape(description),
         "url": SITE_URL + url_path,
         "og_type": og_type,
+        "card": card,
     }.items():
         out = out.replace("{{" + key + "}}", value)
     return out.replace("{{content}}", content)  # content last: post text may contain "{{"
@@ -63,14 +67,16 @@ def read_post(path):
         **meta,
         "date": date,
         "url": f"/blog/{path.stem[11:]}/",
-        "html": markdown.markdown(obsidian_lists(body),extensions=["extra", "sane_lists", "toc"]),
+        "html": markdown.markdown(obsidian_lists(body), extensions=["extra", "sane_lists", "toc"]),
     }
 
 
-def post_list(posts):
+def post_list(posts, with_description=False):
     rows = "".join(
         f'<li><span class="date">{p["date"]:%b %d, %Y}</span>'
-        f'<span><a href="{p["url"]}">{html.escape(p["title"])}</a> <span class="tag">· {p["tag"]}</span></span></li>'
+        f'<span><a href="{p["url"]}">{html.escape(p["title"])}</a> <span class="tag">· {p["tag"]}</span>'
+        + (f'<span class="desc">{html.escape(p["description"])}</span>' if with_description else "")
+        + "</span></li>"
         for p in posts
     )
     return f'<ul class="posts">{rows}</ul>'
@@ -79,8 +85,16 @@ def post_list(posts):
 def post_page(p):
     discuss = f'<a href="{p["telegram"]}">Discuss on Telegram (RU)</a>' if "telegram" in p else f'<a href="{TELEGRAM}">Telegram channel (RU)</a>'
     return f"""<article>
-<header><h1>{html.escape(p["title"])}</h1>
-<div class="meta">{p["date"]:%B %d, %Y} · {p["tag"]}</div></header>
+<header class="title-block">
+<h1>{html.escape(p["title"])}</h1>
+<p class="dek">{html.escape(p["description"])}</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>UMH, Spain</div>
+  <div><span>Published</span>{p["date"]:%b %d, %Y}</div>
+  <div><span>Type</span>{p["tag"]}</div>
+</div>
+</header>
 {p["html"]}
 <div class="post-footer"><a href="/blog/">← All posts</a>{discuss}</div>
 </article>
@@ -110,9 +124,9 @@ def main():
     home = (ROOT / "templates/home.html").read_text().replace("{{posts}}", post_list(posts[:5]))
     write("/", page("Aleksandr Kovalev", "AI models for intracortical brain-computer interfaces.", "/", home))
     write("/blog/", page("Blog · Aleksandr Kovalev", "Notes on brain-computer interfaces and AI.", "/blog/",
-                         f"<h1>Blog</h1>\n{post_list(posts)}"))
+                         f"<h1>Blog</h1>\n{post_list(posts, with_description=True)}"))
     for p in posts:
-        write(p["url"], page(p["title"], p["description"], p["url"], post_page(p), og_type="article"))
+        write(p["url"], page(p["title"], p["description"], p["url"], post_page(p), og_type="article", image=p.get("image")))
     write("/feed.xml", feed(posts))
     print(f"built {len(posts)} posts → {OUT}")
 
