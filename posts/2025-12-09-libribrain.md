@@ -1,7 +1,7 @@
 ---
 title: 3rd place at LibriBrain, NeurIPS 2025
 description: Speech detection from MEG, 91% F1-macro, 3rd place. What surprised us, what worked (normalization, conv + transformer, weight averaging) and what didn't (augmentations, MAE pretraining, synthetic data).
-tag: own work
+tag: my work
 image: /img/libribrain/architecture.jpg
 telegram: https://t.me/neural_cell/303
 ---

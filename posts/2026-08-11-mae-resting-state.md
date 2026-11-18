@@ -1,7 +1,7 @@
 ---
 title: Masked autoencoders learn perception-relevant representations from resting-state V1
 description: We pretrain an MAE on 14.6 hours of spontaneous activity from V1 of a blind patient with a Utah array, and decode from the response to stimulation whether the person sees a phosphene. Our AAAI-26 workshop paper.
-tag: own work
+tag: my work
 image: /img/mae-resting-state/paper.jpg
 telegram: https://t.me/neural_cell/341
 ---
