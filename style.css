@@ -57,7 +57,7 @@ header.site nav a { margin-left: 1.25rem; color: var(--muted); }
   display: inline-flex; line-height: 0;
 }
 .theme-toggle:hover { color: var(--text); }
-.theme-toggle svg { width: 1.05rem; height: 1.05rem; }
+.theme-toggle svg { width: 1.2rem; height: 1.2rem; }
 footer.site { margin: 5rem 0 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); }
 footer.site a { color: var(--muted); }
 
@@ -94,7 +94,22 @@ th { font-weight: 600; }
 .footnote { font-size: 0.9rem; color: var(--muted); }
 
 /* small sans meta text */
-.meta, .links, .date, .tag { font: 400 0.875rem/1.5 var(--sans); color: var(--muted); }
+.meta, .links, .date { font: 400 0.875rem/1.5 var(--sans); color: var(--muted); }
+/* post type: a small pill after the title */
+.type {
+  display: inline-block; margin-left: 0.35rem; padding: 0 0.45rem; vertical-align: 0.1em;
+  font: 500 0.7rem/1.5 var(--sans); color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; white-space: nowrap;
+}
+/* blog filter chips */
+.filters { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.5rem; }
+.chip {
+  font: 500 0.8rem/1 var(--sans); color: var(--muted); background: none; cursor: pointer;
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.4rem 0.8rem;
+}
+.chip:hover { color: var(--text); border-color: var(--muted); }
+.chip.active { color: var(--bg); background: var(--text); border-color: var(--text); }
+section.year h2 { margin-top: 2.25rem; }
+ul.posts li[hidden], section.year[hidden] { display: none; }
 .date { font-variant-numeric: tabular-nums; }
 
 /* home */

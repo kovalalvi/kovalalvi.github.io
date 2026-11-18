@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Impressions from AAAI-26</title>
-<meta name="description" content="My first AI conference, in Singapore. Posters beat talks, four motor decoding labs in Beijing alone, and the AI for Neuro workshop: Tolias and Schrimpf on scaling models of the brain.">
-<meta property="og:title" content="Impressions from AAAI-26">
-<meta property="og:description" content="My first AI conference, in Singapore. Posters beat talks, four motor decoding labs in Beijing alone, and the AI for Neuro workshop: Tolias and Schrimpf on scaling models of the brain.">
+<title>AAAI-26: impressions and tasty papers</title>
+<meta name="description" content="My first AI conference, in Singapore: posters beat talks, four motor decoding labs in Beijing alone, Tolias and Schrimpf on scaling models of the brain. Plus four neuro papers from the conference I liked.">
+<meta property="og:title" content="AAAI-26: impressions and tasty papers">
+<meta property="og:description" content="My first AI conference, in Singapore: posters beat talks, four motor decoding labs in Beijing alone, Tolias and Schrimpf on scaling models of the brain. Plus four neuro papers from the conference I liked.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kovalalvi.github.io/blog/aaai-26/">
 <meta property="og:image" content="https://kovalalvi.github.io/img/aaai-26/poster.jpg">
@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v=5d5a80f0">
 <script>
   // theme toggle: a saved choice wins over the OS setting; set before paint to avoid a flash
   try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -36,13 +36,13 @@
 <main>
 <article>
 <header class="title-block">
-<h1>Impressions from AAAI-26</h1>
-<p class="dek">My first AI conference, in Singapore. Posters beat talks, four motor decoding labs in Beijing alone, and the AI for Neuro workshop: Tolias and Schrimpf on scaling models of the brain.</p>
+<h1>AAAI-26: impressions and tasty papers</h1>
+<p class="dek">My first AI conference, in Singapore: posters beat talks, four motor decoding labs in Beijing alone, Tolias and Schrimpf on scaling models of the brain. Plus four neuro papers from the conference I liked.</p>
 <div class="byline">
   <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
   <div><span>Affiliation</span>UMH, Spain</div>
   <div><span>Published</span>Feb 07, 2026</div>
-  <div><span>Type</span>story</div>
+  <div><span>Type</span>conference</div>
 </div>
 </header>
 <div class="gallery"><img src="/img/aaai-26/poster.jpg" alt="Me at our poster"><img src="/img/aaai-26/workshop.jpg" alt="The AI for Neuro workshop panel"><img src="/img/aaai-26/singapore.jpg" alt="Singapore at night"></div>
@@ -62,6 +62,27 @@
 <p>I presented "Masked Autoencoders Learn Perception-Relevant Representations from Resting State Neural Data" at the workshop poster session. In short: we take resting-state data (the brain just "hums", no stimulation), pretrain a model on it, and after that it better predicts what a person perceives when the visual implant stimulates.</p>
 <h2 id="plans">Plans</h2>
 <p>While we prepare for the next patient to be implanted with electrodes, we want to collect as much data as possible, including from monkeys, and finally scale the models properly. The main pain: data drift between sessions, and a model from one patient is very hard to transfer to another.</p>
+<h2 id="tasty-aaai-26-papers">Tasty AAAI-26 papers</h2>
+<p><img alt="Figures from the four papers" src="/img/aaai-26-papers/papers.jpg" /></p>
+<h3 id="mindsight">MindSight</h3>
+<p><a href="https://doi.org/10.1101/2025.11.12.688136">MindSight: Bio-Inspired Neural Architecture for Visual Restoration via Cortical Electrical Stimulation</a></p>
+<p><strong>tl;dr:</strong> the system learns to generate voltage patterns on electrodes to create the desired visual percepts through cortical stimulation. Tested on real macaques.</p>
+<p>Recording from 1280 V1 channels, decoding from 50 ms MUA windows, predicting the current for each electrode. Two training paths: through an MUA decoder and through a phosphene simulator. At least 16 channels must activate together per electrode (found via saccade experiments). Blindfolded macaques tell shapes apart at the level of normal vision and walk around obstacles.</p>
+<p>💬 Probably the most unusual work at the conference. Not a simulation, not "we showed it is possible in principle", but a real thing that works in primates. 1280 channels is a serious scale, and the fact that the macaques actually navigate and tell shapes apart is already a bit more than a proof of concept.</p>
+<h3 id="orthogonal-representations">Orthogonal representations</h3>
+<p><a href="https://arxiv.org/abs/2508.08681">Multi-dimensional Neural Decoding with Orthogonal Representations</a></p>
+<p><strong>tl;dr:</strong> regularization through orthogonality of the latent space for decoding movements. Utah array, macaque motor cortex; they decode direction, position, velocity and acceleration at the same time.</p>
+<p>An orthogonality loss splits the latent into pieces, one per movement parameter. There is a session classification head; at transfer, its weights are used to throw out session features. Cross-session 2-shot direction accuracy 72.6% → 80.2%, cross-subject R² for velocity 0.592 → 0.653. Ablation: only the combination of orthogonalization and the session head gives the effect; each alone gives almost nothing.</p>
+<p>💬 I talked with Kaixi at the conference, but I still didn't fully get why to classify the session. To me it is more logical to anti-classify, that is, explicitly remove all session information from the representations and do it during training, not after. Either way the direction is right: session drift is one of the main problems in BCI.</p>
+<h3 id="mindcross">MindCross</h3>
+<p><a href="https://arxiv.org/abs/2511.14196">MindCross: Fast New Subject Adaptation for Cross-subject Video Reconstruction from Brain Signals</a></p>
+<p><strong>tl;dr:</strong> video reconstruction from brain signals with fast adaptation to a new subject. They split the latent into subject-specific and subject-agnostic parts.</p>
+<p>One shared encoder + N subject-specific encoders. The specific part handles the patient's peculiarities, the shared part the semantics of the video. When adapting to a new subject, only their specific encoder is trained.</p>
+<p>💬 I'd do exactly the opposite. The shared encoder should give session-specific information, and the individual encoders session-invariant features. Every person's brain is unique, and it is the individual encoder that should map this unique topology into a shared semantic space. Even better: use a LoRA for each participant and <strong>train a meta-model that generates LoRA weights from a new subject's resting state.</strong></p>
+<h3 id="synthetic-emg">Synthetic EMG</h3>
+<p><a href="https://arxiv.org/abs/2509.23359">New Synthetic Goldmine: Hand Joint Angle-Driven EMG Data Generation</a></p>
+<p><strong>tl;dr:</strong> generating synthetic EMG data from finger movements to improve gesture classification. The model solves the inverse problem: it invents muscle activity for a given gesture. +2–3% accuracy.</p>
+<p>💬 I tried to make synthetic data work several times, for both EMG and MEG. Generation worked, but it gave no gain in quality. This paper proves once again that my hands just grew from the wrong place and I need to try again!</p>
 <div class="post-footer"><a href="/blog/">← All posts</a><a href="https://t.me/neural_cell/327">Discuss on Telegram (RU)</a></div>
 </article>
 <script src="/toc.js" defer></script>
