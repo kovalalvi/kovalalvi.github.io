@@ -117,7 +117,7 @@ def post_page(p):
 <p class="dek">{html.escape(p["description"])}</p>
 <div class="byline">
   <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
-  <div><span>Affiliation</span>UMH, Spain</div>
+  <div><span>Affiliation</span>{html.escape(p.get("affiliation", "UMH, Spain"))}</div>
   <div><span>Published</span>{p["date"]:%b %d, %Y}</div>
   <div><span>Type</span>{p["tag"]}</div>
 </div>
