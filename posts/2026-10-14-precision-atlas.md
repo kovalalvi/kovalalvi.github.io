@@ -2,7 +2,11 @@
 title: A whole-brain interface from 70 patients: the Precision Neuroscience atlas
 description: Precision recorded 70 patients with 1024-electrode surface grids and built an atlas of cortex, brainstem and spinal cord. What they found, and what I would train on this data.
 tag: review
+image: /img/precision-atlas/fig1.jpg
+telegram: https://t.me/neural_cell/345
 ---
+
+![Figure 1 of the preprint: array placement, tasks, data processing and the brain atlas](/img/precision-atlas/fig1.jpg)
 
 Precision Neuroscience posted a big preprint: they recorded 70 patients with their flexible 1024-electrode grids (micro-ECoG) and built an atlas from it. Cortex, brainstem, and even the spinal cord.
 
