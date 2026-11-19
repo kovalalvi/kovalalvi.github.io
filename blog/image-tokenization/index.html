@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Image tokenization: from convolutions to transformers</title>
+<meta name="description" content="TiTok, FlexTok and FlowMO turn an image into a short sequence of tokens.">
+<meta property="og:title" content="Image tokenization: from convolutions to transformers">
+<meta property="og:description" content="TiTok, FlexTok and FlowMO turn an image into a short sequence of tokens.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kovalalvi.github.io/blog/image-tokenization/">
+<meta property="og:image" content="https://kovalalvi.github.io/img/image-tokenization/titok.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kovalalvi.github.io/blog/image-tokenization/">
+<link rel="alternate" type="application/rss+xml" title="Aleksandr Kovalev" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css?v=3fa00425">
+<script>
+  // theme toggle: a saved choice wins over the OS setting; set before paint to avoid a flash
+  try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  function toggleTheme() {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  }
+</script>
+</head>
+<body>
+<header class="site">
+  <a class="home" href="/">Aleksandr Kovalev</a>
+  <nav><a href="/blog/">Blog</a><a href="/cv.pdf">CV</a><button class="theme-toggle" onclick="toggleTheme()" aria-label="Switch light or dark theme" title="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button></nav>
+</header>
+<main>
+<article>
+<header class="title-block">
+<h1>Image tokenization: from convolutions to transformers</h1>
+<p class="dek">TiTok, FlexTok and FlowMO turn an image into a short sequence of tokens.</p>
+<div class="byline">
+  <div><span>Author</span><a href="/">Aleksandr Kovalev</a></div>
+  <div><span>Affiliation</span>UMH, Spain</div>
+  <div><span>Published</span>Apr 15, 2025</div>
+  <div><span>Type</span>review</div>
+</div>
+</header>
+<p>For years, people used different kinds of autoencoders to compress images. To get a discrete representation (a set of specific "symbols" instead of continuous values), they used VQ-VAE: a regular autoencoder with a vector-quantized layer in the middle.</p>
+<p>In mid-2024 transformers reached this area too.</p>
+<p>The main idea:</p>
+<ol>
+<li>Replace convolutions with transformers.</li>
+<li>Drop the 2D grid and represent an image as a plain sequence of tokens, with no explicit spatial position for each token.</li>
+</ol>
+<h2 id="titok-an-image-is-worth-32-tokens">TiTok: An Image is Worth 32 Tokens</h2>
+<p>Paper: <a href="https://arxiv.org/abs/2406.07550">arxiv.org/abs/2406.07550</a></p>
+<p>The main point: 32, 64 or 128 tokens are enough to represent a whole image.</p>
+<p>How it works:</p>
+<ul>
+<li>The encoder and the decoder are both Vision Transformers.</li>
+<li>Special register tokens are added to the image patches.</li>
+<li>The register tokens are quantized: each becomes a vector from a codebook.</li>
+<li>These tokens go into the decoder together with [MASK] tokens.</li>
+</ul>
+<p>This architecture is similar to MAE (Masked Autoencoder), but the focus is on a compact representation.</p>
+<p>For generation they use MaskGIT, and the images are quite good. No diffusion: everything is fast and simple.</p>
+<p>Linear probing accuracy drops as the number of tokens goes up, so there is a trade-off between compression and feature quality.</p>
+<p><img alt="TiTok: reconstruction and generation, the tokenizer, and results for different numbers of tokens" src="/img/image-tokenization/titok.jpg" /></p>
+<h2 id="flextok-flexible-token-length">FlexTok: flexible token length</h2>
+<p>Paper: <a href="https://arxiv.org/abs/2502.13967">arxiv.org/abs/2502.13967</a></p>
+<p>FlexTok takes the TiTok idea, but starts from VAE latents instead of the original image:</p>
+<ul>
+<li>It adds flow matching for the decoder.</li>
+<li>The registers are the condition for the decoder.</li>
+<li>Nested dropout on the registers lets the decoder work with any number of tokens, from 1 to 256.</li>
+<li>It uses FSQ quantization, like COSMOS by NVIDIA.</li>
+</ul>
+<p><img alt="FlexTok: images from 1 to 256 tokens, and the training scheme" src="/img/image-tokenization/flextok.jpg" /></p>
+<h2 id="flowmo-the-direct-approach">FlowMO: the direct approach</h2>
+<p>Paper: <a href="https://arxiv.org/abs/2503.11056">arxiv.org/abs/2503.11056</a></p>
+<p>FlowMO is TiTok with a diffusion decoder:</p>
+<ul>
+<li>It works directly with images.</li>
+<li>It uses all tokens for reconstruction.</li>
+<li>The decoder is diffusion, like in FlexTok.</li>
+</ul>
+<p><img alt="FlowMO: reconstructions and the architecture" src="/img/image-tokenization/flowmo.jpg" /></p>
+<h2 id="comparison">Comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Works with</th>
+<th>Diffusion decoder</th>
+<th>Distillation</th>
+<th>Quantization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TiTok</td>
+<td>Raw images</td>
+<td>No</td>
+<td>Via MagViT VQ-VAE</td>
+<td>Standard VQ</td>
+</tr>
+<tr>
+<td>FlexTok</td>
+<td>VAE latents</td>
+<td>Yes</td>
+<td>No</td>
+<td>FSQ, 64k vectors</td>
+</tr>
+<tr>
+<td>FlowMO</td>
+<td>Raw images</td>
+<td>Yes</td>
+<td>No</td>
+<td>LFQ (sign) with complex losses</td>
+</tr>
+</tbody>
+</table>
+<h2 id="my-thoughts-on-where-this-can-go">My thoughts on where this can go</h2>
+<p>Combine MAE with TiTok:</p>
+<ul>
+<li>Mask the input image, as in MAE. In theory this should make training faster and the tokens even more informative.</li>
+</ul>
+<p>Combine FlexTok, TiTok and MAE into one universal feature extractor:</p>
+<ul>
+<li>Random masking of the input image (0, 0.25, 0.5, 0.75, 1).</li>
+<li>Nested dropout for the latents, as in FlexTok.</li>
+<li>Token masking for the decoder (0.5, 0.75, 1), as MaskGIT already does.</li>
+<li>Plus REPA on top.</li>
+</ul>
+<div class="post-footer"><a href="/blog/">← All posts</a></div>
+</article>
+<script src="/toc.js" defer></script>
+</main>
+<footer class="site">
+  <span>Aleksandr Kovalev</span>
+  <a href="/feed.xml">RSS</a>
+</footer>
+<!-- page views: GoatCounter, no cookies -->
+<script data-goatcounter="https://kovalalvi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

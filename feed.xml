@@ -12,7 +12,9 @@
 <guid>https://kovalalvi.github.io/blog/aaai-26/</guid><pubDate>Sat, 07 Feb 2026 00:00:00 +0000</pubDate>
 <description>My first AI conference, in Singapore, and four neuro papers I liked.</description></item><item><title>3rd place at LibriBrain, NeurIPS 2025</title><link>https://kovalalvi.github.io/blog/libribrain/</link>
 <guid>https://kovalalvi.github.io/blog/libribrain/</guid><pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-<description>Speech detection from MEG: what worked and what didn&#x27;t.</description></item><item><title>Smart stimulation patterns for visual prostheses</title><link>https://kovalalvi.github.io/blog/smart-stimulation/</link>
+<description>Speech detection from MEG: what worked and what didn&#x27;t.</description></item><item><title>Image tokenization: from convolutions to transformers</title><link>https://kovalalvi.github.io/blog/image-tokenization/</link>
+<guid>https://kovalalvi.github.io/blog/image-tokenization/</guid><pubDate>Tue, 15 Apr 2025 00:00:00 +0000</pubDate>
+<description>TiTok, FlexTok and FlowMO turn an image into a short sequence of tokens.</description></item><item><title>Smart stimulation patterns for visual prostheses</title><link>https://kovalalvi.github.io/blog/smart-stimulation/</link>
 <guid>https://kovalalvi.github.io/blog/smart-stimulation/</guid><pubDate>Thu, 10 Apr 2025 00:00:00 +0000</pubDate>
 <description>Four papers on stimulation that adapts to the patient.</description></item><item><title>Understanding generative models: diffusion and flow matching</title><link>https://kovalalvi.github.io/blog/diffusion-flow-matching/</link>
 <guid>https://kovalalvi.github.io/blog/diffusion-flow-matching/</guid><pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
